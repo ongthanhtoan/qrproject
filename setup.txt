@@ -1,0 +1,5 @@
+﻿B1: Clone source git clone "link" https://github.com/ongthanhtoan/quanlytaisan.git
+B2: gõ lệnh composer update
+B3: tạo file env: cp .env.example .env
+B4: tạo key: php artisan key:generate
+B5: php artisan serve
