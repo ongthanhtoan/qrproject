@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert(
                 [
                     'HoTen' => 'Hỗ trợ',
-                    'username' => 'hotro',
-					'password' => '$10$i/.VtYHYyFQMYtJf2vd.LeXHhvMvUBb9I0uisP9GghzNppsejIQtK'
+                    'username' => 'admin',
+					'password' => bcrypt(111111)
                 ]
         );
     }
