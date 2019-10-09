@@ -13,7 +13,7 @@ class CreateBanGiaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('bangiao', function (Blueprint $table) {
+        Schema::create('BanGiao', function (Blueprint $table) {
             $table->bigIncrements('bg_MaBG');
             $table->string('bg_NguoiGiao');
             $table->string('bg_NgayGiao');
