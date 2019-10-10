@@ -59,12 +59,12 @@ DANH SÁCH TÀI SẢN
 			<td class="text-center font-size-10 anchu">{{$taisan->cb_HoTen}}</td>
 			<td class="text-center font-size-10">
 				@if($taisan->ts_KiemKe==1)
-				<span>X</span>
+				X
 				@endif
 			</td>
 			<td class="text-center font-size-10">
 				@if($taisan->ts_HieuLuc==1)
-				<span>X</span>
+				X
 				@endif
 			</td>
 			<td class="text-center">
