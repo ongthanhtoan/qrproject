@@ -369,15 +369,15 @@ class TaiSanController extends Controller
         $file =$request->file->store('temp');
 		$path=storage_path('app').'/'.$file;
         if(!empty($file)){
-            $original_name = $path->getClientOriginalName();
-            if($original_name == "themtaisantufile.xlsx")
-            {
+            //$original_name = $path->getClientOriginalName();
+            //if($original_name == "themtaisantufile.xlsx")
+            //{
                 //$file_path = $file->getPathName();
                 Excel::import(new TaiSanImport, $path);
                 return back();
-            }else{
-                $loi[] = "File excel không đúng định dạng, vui lòng sử dụng file mẫu để thêm.";
-            }
+            //}else{
+                //$loi[] = "File excel không đúng định dạng, vui lòng sử dụng file mẫu để thêm.";
+            //}
         }else{
             $loi[] = "Vui lòng chọn file.";
         }
