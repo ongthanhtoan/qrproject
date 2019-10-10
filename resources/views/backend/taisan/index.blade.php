@@ -178,6 +178,12 @@ DANH SÁCH TÀI SẢN
 				},
 				{ 
 					idx: 8
+				},
+				{ 
+					idx: 9
+				},
+				{ 
+					idx: 10
 				}
 				],
 				bootstrap: true,
