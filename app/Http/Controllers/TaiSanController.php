@@ -369,7 +369,7 @@ class TaiSanController extends Controller
         $file =$request->file->store('temp');
 		$path=storage_path('app').'/'.$file;
         if(!empty($file)){
-            $original_name = $file->getClientOriginalName();
+            $original_name = $path->getClientOriginalName();
             if($original_name == "themtaisantufile.xlsx")
             {
                 //$file_path = $file->getPathName();
