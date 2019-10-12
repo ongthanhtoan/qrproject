@@ -52,11 +52,11 @@ class TaiSanController extends Controller
             1 ELSE 0 
         END AS da_ban_giao 
         FROM
-            taisan_$Year a
-            LEFT JOIN loai b ON a.l_MaLoai = b.l_MaLoai
-            LEFT JOIN hientrang c ON a.ht_MaHT = c.ht_MaHT
-            LEFT JOIN canbo d ON a.cb_TenDangNhap = d.cb_TenDangNhap
-            LEFT JOIN bangiao e ON a.ts_MaTS = e.ts_MaTS 
+            taisan_$Year as a
+            LEFT JOIN loai as b ON a.l_MaLoai = b.l_MaLoai
+            LEFT JOIN hientrang as c ON a.ht_MaHT = c.ht_MaHT
+            LEFT JOIN canbo as d ON a.cb_TenDangNhap = d.cb_TenDangNhap
+            LEFT JOIN bangiao as e ON a.ts_MaTS = e.ts_MaTS 
         ORDER BY a.ts_MaTS");
         return view('backend.taisan.index')->with('danhsachtaisan',$TaiSan);
     }
