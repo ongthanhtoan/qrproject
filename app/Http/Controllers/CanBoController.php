@@ -70,7 +70,7 @@ class CanBoController extends Controller
             [
                 'cb_TenDangNhap' => $User[0]->username,
                 'cb_HoTen' => $User[0]->HoTen,
-                'cb_KiemKe' => 1
+                'cb_KiemKe' => 0
             ])){
             return response()->json([
                 $data = 1
