@@ -40,8 +40,6 @@ class TaiSanController extends Controller
             a.ts_SoLuong,
             a.ts_NguyenGia,
             a.ts_NgayKiemKe,
-            a.l_MaLoai,
-            b.l_TenLoai,
             c.ht_MaHT,
             c.ht_TenHT,
             d.cb_HoTen,
@@ -53,7 +51,6 @@ class TaiSanController extends Controller
         END AS da_ban_giao 
         FROM
             taisan_$Year as a
-            LEFT JOIN loai as b ON a.l_MaLoai = b.l_MaLoai
             LEFT JOIN hientrang as c ON a.ht_MaHT = c.ht_MaHT
             LEFT JOIN canbo as d ON a.cb_TenDangNhap = d.cb_TenDangNhap
             LEFT JOIN bangiao as e ON a.ts_MaTS = e.ts_MaTS 
