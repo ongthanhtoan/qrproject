@@ -31,30 +31,33 @@ class TaiSanController extends Controller
 //        ->join('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
 //        ->get();
         $TaiSan = DB::select("SELECT
-            a.ts_MaTS,
-            a.ts_TenTS,
-            a.ts_Nam,
-            a.ts_KiemKe,
-            a.ts_HieuLuc,
-            a.ts_NangCap,
-            a.ts_SoLuong,
-            a.ts_NguyenGia,
-            a.ts_NgayKiemKe,
-            c.ht_MaHT,
-            c.ht_TenHT,
-            d.cb_HoTen,
-            d.cb_TenDangNhap,
-            e.bg_MaBG,
+            taisan.ts_MaTS,
+            taisan.ts_TenTS,
+            taisan.ts_Nam,
+            taisan.ts_KiemKe,
+            taisan.ts_HieuLuc,
+            taisan.ts_NangCap,
+            taisan.ts_SoLuong,
+            taisan.ts_NguyenGia,
+            taisan.ts_NgayKiemKe,
+            taisan.l_MaLoai,
+            loai.l_TenLoai,
+            hientrang.ht_MaHT,
+            hientrang.ht_TenHT,
+            canbo.cb_HoTen,
+            canbo.cb_TenDangNhap,
+            bangiao.bg_MaBG,
         CASE
-            WHEN e.bg_MaBG IS NULL THEN
+            WHEN bangiao.bg_MaBG IS NULL THEN
             1 ELSE 0 
         END AS da_ban_giao 
         FROM
-            taisan_$Year as a
-            LEFT JOIN hientrang as c ON a.ht_MaHT = c.ht_MaHT
-            LEFT JOIN canbo as d ON a.cb_TenDangNhap = d.cb_TenDangNhap
-            LEFT JOIN bangiao as e ON a.ts_MaTS = e.ts_MaTS 
-        ORDER BY a.ts_MaTS");
+            taisan_$Year as taisan
+            LEFT JOIN loai as loai ON taisan.l_MaLoai = loai.l_MaLoai
+            LEFT JOIN hientrang as hientrang ON taisan.ht_MaHT = hientrang.ht_MaHT
+            LEFT JOIN canbo as canbo ON taisan.cb_TenDangNhap = canbo.cb_TenDangNhap
+            LEFT JOIN bangiao as bangiao ON taisan.ts_MaTS = bangiao.ts_MaTS 
+        ORDER BY taisan.ts_MaTS");
         return view('backend.taisan.index')->with('danhsachtaisan',$TaiSan);
     }
 
