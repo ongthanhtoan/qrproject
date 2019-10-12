@@ -13,8 +13,8 @@ DANH SÁCH TÀI SẢN
         width: 100%;
         clear: both;
         border-collapse: collapse;
-        table-layout: fixed; // ***********add this
-        word-wrap:break-word; // ***********and this
+        table-layout: fixed; 
+        word-wrap:break-word;
     }
 	/*#myTable_filterWrapper{
 		width: 200px;
@@ -57,7 +57,7 @@ DANH SÁCH TÀI SẢN
 		@foreach($danhsachtaisan as $stt => $taisan)
 		<tr >
 			<td class="text-center font-size-10"><a href="{{route('kiem-ke-tai-san.show',['id'=>$taisan->ts_MaTS])}}"><b>{{$stt+1}}</b></a></td>
-			<td class="text-center font-size-10">{{$taisan->ts_MaTS}}</td>
+			<td class="text-center font-size-10 anchu">{{$taisan->ts_MaTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ts_TenTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->l_TenLoai}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ht_TenHT}}</td>
@@ -138,13 +138,13 @@ DANH SÁCH TÀI SẢN
 	$(document).ready(function(){
 		$('#myTable').DataTable({
                         columnDefs: [
-                            { width: 10, targets: 0 },
+                            { width: 18, targets: 0 },
                             { width: 20, targets: 1 },
                             { width: 50, targets: 4 },
-                            { width: 10, targets: 5 },
-                            { width: 30, targets: 6 },
-                            { width: 30, targets: 7 },
-                            { width: 10, targets: 11 },
+                            { width: 33, targets: 5 },
+                            { width: 35, targets: 6 },
+                            { width: 35, targets: 7 },
+                            { width: 20, targets: 11 },
                             { width: 40, targets: 12 },
                         ],
 			pageLength: 25,
