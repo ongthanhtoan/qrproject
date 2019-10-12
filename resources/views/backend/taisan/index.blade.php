@@ -144,6 +144,8 @@ DANH SÁCH TÀI SẢN
                             { width: 33, targets: 5 },
                             { width: 35, targets: 6 },
                             { width: 35, targets: 7 },
+                            { width: 50, targets: 9 },
+                            { width: 50, targets: 10 },
                             { width: 20, targets: 11 },
                             { width: 40, targets: 12 },
                         ],
