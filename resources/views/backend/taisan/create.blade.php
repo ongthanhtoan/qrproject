@@ -16,7 +16,7 @@ THÊM MỚI TÀI SẢN
 	}
 </style>
 @endsection
-<form class="validate" autocomplete="off">
+<form id="frmMain" onSubmit="return false;" class="validate" autocomplete="off">
 	<div class="row">
 		<div class="col-md-6">
 
@@ -33,7 +33,7 @@ THÊM MỚI TÀI SẢN
 			<div class="form-group">
 				<label for="ts_TenTS" class="control-label">Tên Tài Sản</label>
 
-				<input type="text" class="form-control" id="ts_TenTS" name="ts_TenTS" placeholder="Nhập Tên Tài Sản" data-validate="required" data-message-required="Vui lòng nhập giá">
+				<input type="text" class="form-control" id="ts_TenTS" name="ts_TenTS" placeholder="Nhập Tên Tài Sản" data-validate="required" data-message-required="Vui lòng nhập tên tài sản">
 			</div>	
 
 		</div>
@@ -43,7 +43,7 @@ THÊM MỚI TÀI SẢN
 			<div class="form-group">
 				<label class="control-label">Số Lượng</label>
 
-				<input type="text" class="form-control" id="ts_SoLuong" name="ts_SoLuong" data-validate="number" placeholder="Nhập Số Lượng" aria-invalid="false" aria-describedby="number-error"><span id="number-error" class="validate-has-error" style="display: none;"></span>
+                                <input type="text" class="form-control" id="ts_SoLuong" name="ts_SoLuong" data-validate="number" placeholder="Nhập Số Lượng" aria-invalid="false" aria-describedby="number-error"><span id="number-error" class="validate-has-error" style="display: none;"></span>
 			</div>	
 
 		</div>
@@ -137,8 +137,8 @@ THÊM MỚI TÀI SẢN
 		</div>
 	</div>
 	<div class="text-center">
+		<button type="submit" class="btn btn-info" id="btnThem">Thêm</button>
 		<a href="{{route('tai-san.index')}}" class="btn btn-danger">Đóng</a>
-		<button type="submitc`" class="btn btn-info" id="btnThem">Thêm</button>
 	</div>
 </form>
 @endsection
@@ -146,7 +146,12 @@ THÊM MỚI TÀI SẢN
 <script>
 	$(document).ready(function(){
 		$('#btnThem').click(function(){
-			$.ajax({
+                    var data =  $("#frmMain").serialize();
+			if($("#ts_MaTS").val() != "" && $("#ts_TenTS").val() != "" && $("#ts_SoLuong").val() != "" 
+                                && $("#ts_NguyenGia").val() != "" && $("#ts_Nam").val() != "" 
+                                && $("#slCanBo").val() != 0 && $("#ts_NgayKiemKe").val() != "" 
+                                && $("#slLoai").val() != 0 && $("#slHienTrang").val() != 0){
+                            $.ajax({
 				type: 'POST',
 				url: '{{route('tai-san.store')}}',
 				data: {
@@ -187,6 +192,13 @@ THÊM MỚI TÀI SẢN
 					}
 				}
 			});
+                        }else{
+                            swal({
+                                title: "Thất Bại",
+                                text: "Vui lòng nhập đầy đủ thông tin!",
+                                icon: "error",
+                            });
+                        }
 		});
 	});
 </script>

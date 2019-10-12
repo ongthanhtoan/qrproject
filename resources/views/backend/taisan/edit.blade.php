@@ -127,8 +127,8 @@ CẬP NHẬT TÀI SẢN
 		</div>
 	</div>
 	<div class="text-center">
-		<a href="{{route('tai-san.index')}}" class="btn btn-danger">Đóng</a>
 		<button type="button" class="btn btn-info" id="btnSua">Cập Nhật</button>
+		<a href="{{route('tai-san.index')}}" class="btn btn-danger">Đóng</a>
 	</div>
 </form>
 @endsection
