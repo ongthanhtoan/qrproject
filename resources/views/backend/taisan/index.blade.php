@@ -56,7 +56,7 @@ DANH SÁCH TÀI SẢN
 	<tbody>
 		@foreach($danhsachtaisan as $stt => $taisan)
 		<tr >
-			<td class="text-center font-size-10"><a href="{{route('kiem-ke-tai-san.show',['id'=>$taisan->ts_MaTS])}}"><b>{{$stt+1}}</b></a></td>
+                    <td class="text-center font-size-10"><a href="#" data-id="{{$taisan->ts_MaTS}}" class="get_info"><b>{{$stt+1}}</b></a></td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ts_MaTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ts_TenTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->l_TenLoai}}</td>
@@ -93,49 +93,259 @@ DANH SÁCH TÀI SẢN
 		@endforeach
 	</tbody>
 </table>
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
+    <!--model chi tiet tai san-->
+    <div class="modal fade" id="ChiTiet_TS">
+        <div class="modal-dialog">
+            <div class="modal-content" style="font-size:15px;">
 
-		<!-- Modal content-->
-		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Thêm tài sản từ file</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Thông Tin Chi Tiết Tài Sản</h4>
 			</div>
-			<div class="modal-body">
-				<form role="form" class="form-horizontal form-groups-bordered" method="POST" action="{{route('import.postImport')}}" enctype="multipart/form-data">
-					{{ csrf_field() }}
-					<div class="form-group">
-						<label class="col-sm-3 control-label">Chọn file: </label>
 
-						<div class="col-sm-7">
-							<input type="file" name="file" id="file" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i> Browse" />
-						</div>
-						<button type="submit" class="btn btn-success">Thực hiện</button>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">Tải file mẫu:</label>
+                <div class="modal-body" style="width: 100">
+				<p class="error" style="color:red;"></p>
+				<div class="row">
+					<div class="col-md-4">
 
-						<div class="col-sm-7">
-							<a target="_blank" href="{{route('tai-file-mau')}}">
-								<img src="{{asset('theme/backend/assets/images/dow.png')}}" width="50px" height="50px">
-							</a>
-						</div>
+						<div class="form-group" style='text-align: right'>
+                                                    <p><b>Mã tài sản:</b></p>
+						</div>	
+
 					</div>
-				</form>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='Ma_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4">
+
+						<div class="form-group" style='text-align: right'>
+                                                    <p><b>Tên tài sản:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='Ten_TS' style='word-wrap: break-word'> </p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4">
+
+						<div class="form-group" style='text-align: right'>
+                                                    <p><b>Loại tài sản:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='Loai_TS' style='word-wrap: break-word;'> </p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4">
+
+						<div class="form-group" style='text-align: right'>
+                                                    <p><b>Nguyên giá:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='NguyenGia_TS' style='word-wrap: break-word;'> </p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4">
+
+						<div class="form-group" style='text-align: right'>
+                                                    <p><b>Số lượng:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='SoLuong_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4">
+
+						<div class="form-group" style='text-align: right'>
+                                                    <p><b>Hiện trạng:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='HienTrang_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4" style='text-align: right'>
+
+						<div class="form-group">
+                                                    <p><b>Năm mua:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='NamMua_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4" style='text-align: right'>
+
+						<div class="form-group">
+                                                    <p><b>Ngày kiểm kê:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='NgayKiemKe_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4" style='text-align: right'>
+
+						<div class="form-group">
+                                                    <p><b>Người kiểm kê:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='NguoiKiemKe_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4" style='text-align: right'>
+                                            
+						<div class="form-group">
+                                                    <p><b>Nâng cấp:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+                                            
+						<div class="form-group">
+                                                    <p id='NangCap_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+                                <div class="row">
+					<div class="col-md-4" style='text-align: right'>
+
+						<div class="form-group">
+                                                    <p><b>Kiểm kê:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8">
+
+						<div class="form-group">
+                                                    <p id='KiemKe_TS' style='word-wrap: break-word;'></p>
+						</div>	
+
+					</div>
+
+				</div>
+
 			</div>
+
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+				<button type="button" class="btn btn-red" data-dismiss="modal">Đóng</button>
 			</div>
 		</div>
-
 	</div>
+</div>
+    <!-- end model chi tiet tai san-->
 </div>
 @endsection
 @section('custom-script')
 <script>
 	$(document).ready(function(){
+            $(".get_info").click(function(){
+                var ID = $(this).data('id');
+                var URL = "{{ route('tai-san.show',":id") }}";
+                URL = URL.replace(':id', ID);
+                $.ajax({
+                        type: "GET",
+                        url: URL,
+                        success: function(data){
+                            $("#Ma_TS").html(data[0]['ts_MaTS']);
+                            $("#Ten_TS").html(data[0]['ts_TenTS']);
+                             $("#Loai_TS").html(data[0]['l_TenLoai']);
+                             $("#NguyenGia_TS").html(data[0]['ts_NguyenGia']);
+                             $("#SoLuong_TS").html(data[0]['ts_SoLuong']);
+                             $("#HienTrang_TS").html(data[0]['ht_TenHT']);
+                             $("#NamMua_TS").html(data[0]['ts_Nam']);
+                             $("#NgayKiemKe_TS").html(data[0]['ts_NgayKiemKe']);
+                             $("#NguoiKiemKe_TS").html(data[0]['cb_HoTen']);
+                             $("#NangCap_TS").html(data[0]['ts_NangCap']);
+                             var kiemKe ='';
+                             if(data[0]['ts_KiemKe'] == 1){
+                                 kiemKe = "Đã kiểm kê";
+                             }else{
+                                 kiemKe = "Chưa kiểm kê";
+                             }
+                             $("#KiemKe_TS").html(kiemKe);
+//                             console.log(data);
+                        },
+                        error: function(){
+                            swal({
+                                    title: "Thất Bại!",
+                                    text: "Không Thể Sửa Vào Lúc Này",
+                                    icon: "error",
+                                    button: "OK!",
+                            });
+                        }
+                });
+                $(".error").html('');
+                $('#ChiTiet_TS').modal().show();
+            });
 		$('#myTable').DataTable({
                         columnDefs: [
                             { width: 18, targets: 0 },
@@ -246,5 +456,11 @@ DANH SÁCH TÀI SẢN
 			});
 		});
 	});
+</script>
+<script>
+    $('#modal').click(function(){
+                    $(".error").html('');
+			$('#ChiTiet_TS').modal().show();
+		});
 </script>
 @endsection

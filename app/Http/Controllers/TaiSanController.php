@@ -98,7 +98,14 @@ class TaiSanController extends Controller
      */
     public function show($id)
     {
-        //
+        $Year = date('Y');
+        $TaiSan = DB::table('taisan_'.$Year)
+        ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
+        ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
+        ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
+        ->where('ts_MaTS',$id)
+        ->get();
+        return $TaiSan;
     }
 
     /**

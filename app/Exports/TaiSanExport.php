@@ -68,7 +68,7 @@ class TaiSanExport implements FromView, WithEvents, ShouldAutoSize
 
     			$event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(20);
 
-    			$event->sheet->getStyle('A1:S'.$Count)->getAlignment()->setHorizontal('center');
+    			$event->sheet->getStyle('C1:S'.$Count)->getAlignment()->setHorizontal('center');
     			$event->sheet->getStyle('A1:S2')->getAlignment()->applyFromArray(['vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER] );
     		},
     	];

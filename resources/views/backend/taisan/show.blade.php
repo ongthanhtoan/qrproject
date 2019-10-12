@@ -44,8 +44,7 @@
     @show
 </head>
 {{-- page-body  page-fade class hiệu ứng load trang --}}
-<body class="" data-url="http://neon.dev"> 
-
+<body class="" data-url="http://neon.dev" style="background-color: #FFF"> 
 	<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 		{{-- main content --}}
 		<div class="main-content">
@@ -60,51 +59,54 @@
 				@endif
 				@endforeach
 			</div>
-			<h3 style="color: black; font-weight: bold;" class="text-center text-uppercase">Thông tin tài sản</h3>
-			<table class="table table-bordered responsive" style="font-size: 20px;">
+			<h3 style="color: black; font-weight: bold;" class="text-center text-uppercase">Thông tin tài sản </h3>
+                        <div class="row"></div>
+                        
+                        
+			<table class="table table-bordered responsive" style="font-size: 20px; width: 75%;" align="center">
 				<thead>
 					<tr>
-						<th style="color: black; font-weight: bold;">Mã tài sản:</th>
+						<th style="color: black; font-weight: bold; text-align: right;">Mã tài sản:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->ts_MaTS}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Tên tài sản: </th>
+						<th style="color: black; font-weight: bold; text-align: right;">Tên tài sản: </th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->ts_TenTS}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Loại Tài Sản:</th>
+						<th style="color: black; font-weight: bold; text-align: right;">Loại Tài Sản:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->l_TenLoai}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Nguyên Giá:</th>
+						<th style="color: black; font-weight: bold; text-align:right;">Nguyên Giá:</th>
 						<td style="color: black; font-weight: bold;">{{number_format($danhsachtaisan[0]->ts_NguyenGia),0,'.'}} VNĐ</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Số Lượng:</th>
+						<th style="color: black; font-weight: bold; text-align: right;">Số Lượng:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->ts_SoLuong}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Hiện Trạng:</th>
+						<th style="color: black; font-weight: bold; text-align: left;">Hiện Trạng:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->ht_TenHT}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Năm Mua:</th>
+						<th style="color: black; font-weight: bold; text-align: left;">Năm Mua:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->ts_Nam}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Ngày Kiểm Kê:</th>
+						<th style="color: black; font-weight: bold; text-align: left;">Ngày Kiểm Kê:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->ts_NgayKiemKe}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Người Kiểm Kê:</th>
+						<th style="color: black; font-weight: bold; text-align: left;">Người Kiểm Kê:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->cb_HoTen}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Nâng Cấp:</th>
+						<th style="color: black; font-weight: bold; text-align: left;">Nâng Cấp:</th>
 						<td style="color: black; font-weight: bold;">{{$danhsachtaisan[0]->ts_NangCap}}</td>
 					</tr>
 					<tr>
-						<th style="color: black; font-weight: bold;">Kiểm Kê:</th>
+						<th style="color: black; font-weight: bold; text-align: left;">Kiểm Kê:</th>
 						<td>
 							@if($danhsachtaisan[0]->ts_KiemKe==0)
 							<span class="badge badge-pill m-2 badge-danger">Chưa Kiểm Kê</span>
