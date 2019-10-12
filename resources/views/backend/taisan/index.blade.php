@@ -81,7 +81,7 @@ DANH SÁCH TÀI SẢN
 				<a href="{{route('tai-san.edit',['id'=>$taisan->ts_MaTS])}}"><i class="entypo-pencil" style="font-size: 15px;"></i></a>				
 			</td>
                         <td class="text-center">
-                            @if($taisan->da_ban_giao == 1)
+                            @if($taisan->bg_MaBG == '')
                             <input type="checkbox" class="chon" data-id="{{$taisan->ts_MaTS}}">
                             @endif
 			</td>
