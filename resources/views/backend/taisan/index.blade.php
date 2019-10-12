@@ -332,7 +332,7 @@ DANH SÁCH TÀI SẢN
                                  kiemKe = "Chưa kiểm kê";
                              }
                              $("#KiemKe_TS").html(kiemKe);
-//                             console.log(data);
+                            $('#ChiTiet_TS').modal().show();
                         },
                         error: function(){
                             swal({
@@ -344,7 +344,7 @@ DANH SÁCH TÀI SẢN
                         }
                 });
                 $(".error").html('');
-                $('#ChiTiet_TS').modal().show();
+                
             });
 		$('#myTable').DataTable({
                         columnDefs: [
