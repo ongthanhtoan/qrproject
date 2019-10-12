@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
-<!-- Mirrored from gitapp.top/demo/authfy/demo/login-01.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2019 06:16:33 GMT -->
-
 <head>
     <!-- Basic Page Needs
         ================================================== -->
@@ -24,13 +21,6 @@
 
         <!-- Main structure css file -->
         <link rel="stylesheet" href="{{asset('theme/backend/login/css/login1-style.css')}}">
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if IE]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
 </head>
 
@@ -54,7 +44,7 @@
                     <!-- panel-login start -->
                     <div class="authfy-panel panel-login text-center active">
                         <div class="authfy-heading">
-                            <h3 class="auth-title">NGƯỜI DÙNG</h3>
+                            <h3 class="auth-title">CÁN BỘ ĐĂNG NHẬP</h3>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12">
@@ -79,7 +69,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12">
                                 <div class="authfy-heading">
-                                    <h3 class="auth-title">QUẢN TRỊ</h3>
+                                    <h3 class="auth-title">QUẢN TRỊ ĐĂNG NHẬP</h3>
                                 </div>
                                 <form>
                                    <input type="text" class="form-control email" name="txtUserA" id="txtUserA">

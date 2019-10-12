@@ -7,7 +7,7 @@ DANH SÁCH ĐƠN VỊ
 @endsection
 @section('main-content')
 <p class="action" align="right">
-	<a id="modal" class="btn btn-blue">Thêm</a>
+	<a id="modal" class="btn btn-blue">Thêm mới</a>
 </p>
 <table class="table table-bordered responsive"> 
 	<thead>
@@ -41,7 +41,7 @@ DANH SÁCH ĐƠN VỊ
 			</div>
 
 			<div class="modal-body">
-				
+                            <p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-12">
 
@@ -75,12 +75,12 @@ DANH SÁCH ĐƠN VỊ
 			</div>
 
 			<div class="modal-body">
-				
+				<p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-12">
 
 						<div class="form-group">
-							<label for="dv_TenDV-edit" class="control-label">Tên Phòng</label>
+							<label for="dv_TenDV-edit" class="control-label">Tên Đơn vị</label>
 							<input type="text" class="form-control" id="dv_TenDV-edit" name="dv_TenDV-edit" placeholder="Nhập Tên Đơn Vị">
 						</div>	
 
@@ -103,7 +103,8 @@ DANH SÁCH ĐƠN VỊ
 	$(document).ready(function(){
 		var Key;
 		$('#modal').click(function(){
-			$('#Them').modal().show();
+                    $(".error").html('');
+                    $('#Them').modal().show();
 		});
 		$('#btnThem').click(function(){
 			if($('#dv_TenDV').val() != ""){
@@ -119,7 +120,7 @@ DANH SÁCH ĐƠN VỊ
 							$('#Them').modal('hide');
 							swal({
 								title: "Thành Công",
-								text: "Đơn Vị Đã Được Thêm Mới!",
+								text: "Thêm mới thành công!",
 								icon: "success",
 							}).then(function(){
 								location.href = '{{route('don-vi.index')}}';
@@ -141,7 +142,9 @@ DANH SÁCH ĐƠN VỊ
 						}
 					}
 				});
-			}
+			}else{
+                            $(".error").html("Vui lòng nhập tên Đơn vị.")
+                        }
 		});
 		$('.getSua').click(function(){
 			var ID = $(this).data('id');
@@ -163,6 +166,7 @@ DANH SÁCH ĐƠN VỊ
 					});
 				}
 			});
+                        $(".error").html('');
 			$('#Sua').modal().show();
 		});
 		$('#btnSua').click(function(){
@@ -183,7 +187,7 @@ DANH SÁCH ĐƠN VỊ
 							$('#Sua').modal('hide');
 							swal({
 								title: "Thành Công",
-								text: "Đơn Vị Đã Được Cập Nhật!",
+								text: "Cập nhật thành công!",
 								icon: "success",
 							}).then(function(){
 								location.href = '{{route('don-vi.index')}}';
@@ -205,7 +209,9 @@ DANH SÁCH ĐƠN VỊ
 						}
 					}
 				});
-			}
+			}else{
+                            $(".error").html("Vui lòng nhập tên Đơn vị.")
+                        }
 		});
 		$('.btnXoa').click(function(event){
 			var ID = $(this).data('id');

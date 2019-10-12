@@ -7,7 +7,7 @@ DANH SÁCH PHÒNG BAN
 @endsection
 @section('main-content')
 <p class="action" align="right">
-	<a id="modal" class="btn btn-blue">Thêm</a>
+	<a id="modal" class="btn btn-blue">Thêm mói</a>
 </p>
 <table class="table table-bordered responsive"> 
 	<thead>
@@ -41,7 +41,7 @@ DANH SÁCH PHÒNG BAN
 			</div>
 
 			<div class="modal-body">
-				
+				<p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-12">
 
@@ -75,7 +75,7 @@ DANH SÁCH PHÒNG BAN
 			</div>
 
 			<div class="modal-body">
-				
+				<p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-12">
 
@@ -103,7 +103,8 @@ DANH SÁCH PHÒNG BAN
 	$(document).ready(function(){
 		var Key;
 		$('#modal').click(function(){
-			$('#Them').modal().show();
+                    $(".error").html('');
+                    $('#Them').modal().show();
 		});
 		$('#btnThem').click(function(){
 			if($('#p_TenPhong').val() != ""){
@@ -141,7 +142,9 @@ DANH SÁCH PHÒNG BAN
 						}
 					}
 				});
-			}
+			}else{
+                            $(".error").html('Vui lòng nhập tên Phòng');
+                        }
 		});
 		$('.getSua').click(function(){
 			var ID = $(this).data('id');
@@ -163,6 +166,7 @@ DANH SÁCH PHÒNG BAN
 					});
 				}
 			});
+                        $(".error").html('');
 			$('#Sua').modal().show();
 		});
 		$('#btnSua').click(function(){
@@ -205,7 +209,9 @@ DANH SÁCH PHÒNG BAN
 						}
 					}
 				});
-			}
+			}else{
+                            $(".error").html('Vui lòng nhập tên Phòng');
+                        }
 		});
 		$('.btnXoa').click(function(event){
 			var ID = $(this).data('id');

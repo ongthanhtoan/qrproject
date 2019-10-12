@@ -3,11 +3,11 @@
 Quản Trị
 @endsection
 @section('title-header')
-DANH SÁCH QUẢN TRỊ
+DANH SÁCH TÀI KHOẢN QUẢN TRỊ
 @endsection
 @section('main-content')
 <p class="action" align="right">
-	<a id="modal" class="btn btn-blue">Thêm</a>
+	<a id="modal" class="btn btn-blue">Thêm mới</a>
 </p>
 <table class="table table-bordered responsive"> 
 	<thead>
@@ -43,7 +43,7 @@ DANH SÁCH QUẢN TRỊ
 			</div>
 
 			<div class="modal-body">
-				
+				<p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-12">
 
@@ -84,7 +84,7 @@ DANH SÁCH QUẢN TRỊ
 			</div>
 
 			<div class="modal-body">
-				
+				<p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-12">
 
@@ -126,7 +126,7 @@ DANH SÁCH QUẢN TRỊ
 			$('#Them').modal().show();
 		});
 		$('#btnThem').click(function(){
-			if($('#qt_HoTen').val() != ""){
+			if($('#qt_HoTen').val() != "" && $('#qt_TenDangNhap').val() != "" && $("#qt_MatKhau").val() != ""){
 				$.ajax({
 					type: 'POST',
 					url: '{{route('users.store')}}',
@@ -141,7 +141,7 @@ DANH SÁCH QUẢN TRỊ
 							$('#Them').modal('hide');
 							swal({
 								title: "Thành Công",
-								text: "Quản Trị Đã Được Thêm Mới!",
+								text: "Thêm mới thành công!",
 								icon: "success",
 							}).then(function(){
 								location.href = '{{route('users.index')}}';
@@ -163,7 +163,9 @@ DANH SÁCH QUẢN TRỊ
 						}
 					}
 				});
-			}
+			}else{
+                            $(".error").html('Vui lòng nhập đầy đủ thông tin');
+                        }
 		});
 		$('.getSua').click(function(){
 			var ID = $(this).data('id');
@@ -191,7 +193,7 @@ DANH SÁCH QUẢN TRỊ
 			$('#Sua').modal().show();
 		});
 		$('#btnSua').click(function(){
-			if($('#qt_HoTen-edit').val() != null && $('#qt_TenDangNhap-edit').val() != null){
+			if($('#qt_HoTen-edit').val() != "" && $('#qt_TenDangNhap-edit').val() != ""){
 				var ID = Key;
 				URL = '{{ route('users.update',":id") }}';
 				URL = URL.replace(':id', ID);
@@ -211,7 +213,7 @@ DANH SÁCH QUẢN TRỊ
 							$('#Sua').modal('hide');
 							swal({
 								title: "Thành Công",
-								text: " Đã Được Cập Nhật!",
+								text: "Cập nhật thành công!",
 								icon: "success",
 							}).then(function(){
 								location.href = '{{route('users.index')}}';
@@ -220,7 +222,7 @@ DANH SÁCH QUẢN TRỊ
 							$('#Sua').modal('hide');
 							swal({
 								title: "Thất Bại",
-								text: "Tên Đăng Nhập Đã Tồn Tại!",
+								text: "Quản trị Đã Tồn Tại!",
 								icon: "error",
 							});
 						}else if(data == 2){
@@ -235,6 +237,9 @@ DANH SÁCH QUẢN TRỊ
 					}
 				});
 			}
+                        else{
+                            $(".error").html('Vui lòng nhập đầy đủ thông tin');
+                        }
 		});
 		$('.btnXoa').click(function(event){
 			var ID = $(this).data('id');

@@ -8,9 +8,9 @@
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
 
-	<link rel="icon" href="{{asset('theme/backend/assets/images/favicon.ico')}}">
+	<link rel="icon" href="{{asset('theme/backend/login/images/brand-logo.png')}}">
 
-	<title>Admin CUSC @yield('title')</title>
+	<title>CUSC - Tài sản bàn giao</title>
 
 	<link rel="stylesheet" href="{{asset('theme/backend/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css')}}">
 	<link rel="stylesheet" href="{{asset('theme/backend/assets/css/font-icons/entypo/css/entypo.css')}}">
@@ -32,19 +32,11 @@
 	<link rel="stylesheet" href="{{asset('theme/backend/assets/js/icheck/skins/futurico/futurico.css')}}">
 	<link rel="stylesheet" href="{{asset('theme/backend/assets/js/icheck/skins/polaris/polaris.css')}}">
 	<link rel="stylesheet" href="{{asset('theme/backend/assets/css/custom.css')}}">
-
-	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-	
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
     @section('custom-css')
     @show
 </head>
 {{-- page-body  page-fade class hiệu ứng load trang --}}
-<body class="" data-url="http://neon.dev"> 
+<body class=""> 
 
 	<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 		{{-- main content --}}
@@ -54,7 +46,7 @@
 			{{-- end topsidebar --}}
 			@section('main-content')
 			<h2 class="text-center">Tài Sản Được Bàn Giao</h2>
-			<table class="table table-bordered responsive"> 
+                        <table id="myTable" class="table table-bordered responsive"> 
 				<thead>
 					<tr>
 						<th class="text-center">STT</th>
@@ -88,6 +80,11 @@
 						<td class="text-center">{{$bg->dv_TenDV}}</td>
 					</tr>
 					@endforeach
+                                        @if(count($dsBanGiao)==0)
+                                        <tr>
+                                            <td colspan="8" class="text-center">Không có tài sản nào được bàn giao!</td>
+                                        </tr>
+                                        @endif
 				</tbody>
 			</table>
 			@show
@@ -143,20 +140,52 @@
 	<script src="{{asset('theme/backend/assets/js/neon-custom.js')}}"></script>
 	<script src="{{asset('vendor/sweetalert.min.js')}}"></script>
 	<script src="{{asset('vendor/filterDropDown.min.js')}}"></script>
-	{{-- <script src="{{asset('vendor/jquery.datetimepicker.full.js')}}"></script> --}}
-
-	<!-- Demo Settings -->
-	{{-- <script src="{{asset('theme/backend/assets/js/neon-demo.js')}}"></script> --}}
+	<script src="{{asset('vendor/jquery.datetimepicker.full.js')}}"></script>
 	@section('custom-script')
 	@show
 </body>
 </html>
-@if(Session::has('KiemKe')){
 <script>
-	swal({
-		text: "{{Session::get('KiemKe')}}",
-		icon: "error",
-		button: "OK!",
-	});
+	$(document).ready(function(){
+            $('#myTable').DataTable({
+			pageLength: 25,
+			responsive: true,
+			language: {
+				"sProcessing":   "Đang xử lý...",
+				"sLengthMenu":   "Xem _MENU_",
+				"sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
+				"sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+				"sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
+				"sInfoFiltered": "(được lọc từ _MAX_ mục)",
+				"sInfoPostFix":  "",
+				"sSearch":       "Tìm:",
+				"sUrl":          "",
+				"oPaginate": {
+					"sFirst":    "Đầu",
+					"sPrevious": "Trước",
+					"sNext":     "Tiếp",
+					"sLast":     "Cuối"
+				}
+			},
+			filterDropDown: {
+				label: 'Lọc: ',                                  
+				columns: [
+				{ 
+					idx: 1,
+				},
+				{ 
+					idx: 2,
+				},
+				{ 
+					idx: 3
+				},
+				{ 
+					idx: 5
+				}
+				],
+				bootstrap: true,
+				autoSize: false
+			}
+		});
+        });
 </script>
-@endif

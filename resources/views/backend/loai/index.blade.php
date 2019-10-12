@@ -7,7 +7,7 @@ DANH SÁCH LOẠI TÀI SẢN
 @endsection
 @section('main-content')
 <p class="action" align="right">
-	<a id="modal" class="btn btn-blue">Thêm</a>
+	<a id="modal" class="btn btn-blue">Thêm mới</a>
 </p>
 <table class="table table-bordered responsive"> 
 	<thead>
@@ -43,7 +43,7 @@ DANH SÁCH LOẠI TÀI SẢN
 			</div>
 
 			<div class="modal-body">
-				
+				<p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-6">
 
@@ -86,7 +86,7 @@ DANH SÁCH LOẠI TÀI SẢN
 			</div>
 
 			<div class="modal-body">
-				
+				<p class="error" style="color:red;"></p>
 				<div class="row">
 					<div class="col-md-6">
 
@@ -123,6 +123,7 @@ DANH SÁCH LOẠI TÀI SẢN
 	$(document).ready(function(){
 		var Key;
 		$('#modal').click(function(){
+                    $(".error").html('');
 			$('#Them').modal().show();
 		});
 		$('#btnThem').click(function(){
@@ -140,7 +141,7 @@ DANH SÁCH LOẠI TÀI SẢN
 							$('#Them').modal('hide');
 							swal({
 								title: "Thành Công",
-								text: "Loại Đã Được Thêm Mới!",
+								text: "Thêm mới thành công!",
 								icon: "success",
 							}).then(function(){
 								location.href = '{{route('loai.index')}}';
@@ -162,7 +163,9 @@ DANH SÁCH LOẠI TÀI SẢN
 						}
 					}
 				});
-			}
+			}else{
+                            $(".error").html('Vui lòng nhập tên Loại');
+                        }
 		});
 		$('.getSua').click(function(){
 			var ID = $(this).data('id');
@@ -185,6 +188,7 @@ DANH SÁCH LOẠI TÀI SẢN
 					});
 				}
 			});
+                        $(".error").html('');
 			$('#Sua').modal().show();
 		});
 		$('#btnSua').click(function(){
@@ -206,7 +210,7 @@ DANH SÁCH LOẠI TÀI SẢN
 							$('#Sua').modal('hide');
 							swal({
 								title: "Thành Công",
-								text: "Loại Đã Được Cập Nhật!",
+								text: "Cập nhật thành công!",
 								icon: "success",
 							}).then(function(){
 								location.href = '{{route('loai.index')}}';
@@ -228,7 +232,9 @@ DANH SÁCH LOẠI TÀI SẢN
 						}
 					}
 				});
-			}
+			}else{
+                            $(".error").html('Vui lòng nhập tên Loại');
+                        }
 		});
 		$('.btnXoa').click(function(event){
 			var ID = $(this).data('id');

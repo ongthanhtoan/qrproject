@@ -3,7 +3,7 @@
 Bàn Giao Tài Sản
 @endsection
 @section('title-header')
-DANH SÁCH BÀN GIAO TÀI SẢN
+DANH SÁCH TÀI SẢN ĐÃ BẢN GIAO
 @endsection
 @section('main-content')
 <p align="right">
@@ -21,7 +21,8 @@ DANH SÁCH BÀN GIAO TÀI SẢN
 			<th class="text-center">Ngày Nhận</th>
 			<th class="text-center">Đơn Vị</th>
 			<th class="text-center">Phòng</th>
-			<th class="text-center">Action</th>
+			<th class="text-center">Sửa</th>
+			<th class="text-center">Xóa</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -45,7 +46,9 @@ DANH SÁCH BÀN GIAO TÀI SẢN
 			<td class="text-center">{{$bg->dv_TenDV}}</td>
 			<td class="text-center">{{$bg->p_TenPhong}}</td>
 			<td class="text-center">
-				<a href="{{route('ban-giao.edit',['id'=>$bg->bg_MaBG])}}" class="btn btn-blue btn-icon">Sửa<i class="entypo-pencil"></i></a>
+				<a href="{{route('ban-giao.edit',['id'=>$bg->bg_MaBG])}}"><i class="entypo-pencil"></i></a>
+			</td>
+                        <td class="text-center">
 				<button data-id="{{$bg->bg_MaBG}}" class="btn btn-red btn-icon btnXoa">Xóa<i class="entypo-cancel"></i></button>
 			</td>
 		</tr>
@@ -57,25 +60,6 @@ DANH SÁCH BÀN GIAO TÀI SẢN
 <script>
 	$(document).ready(function(){
 		$('#myTable').DataTable({
-			// initComplete: function () {
-	  //           this.api().columns([1,4,6,7]).every( function () {
-	  //               var column = this;
-	  //               var select = $('<select style = "font-size: 13px;"><option value="">Tất cả</option></select>')
-	  //                   .appendTo( $(column.header()) )
-	  //                   .on( 'change', function () {
-	  //                       var val = $.fn.dataTable.util.escapeRegex(
-	  //                           $(this).val()
-	  //                       );
-	  //                       column
-	  //                           .search( val ? '^'+val+'$' : '', true, false )
-	  //                           .draw();
-	  //                   } );
-	 
-	  //               column.data().unique().sort().each( function ( d, j ) {
-	  //                   select.append( '<option value="'+d+'">'+d+'</option>' )
-	  //               } );
-	  //           } );
-	  //       },
 			pageLength: 25,
 			responsive: true,
 			language: {
@@ -147,13 +131,6 @@ DANH SÁCH BÀN GIAO TÀI SẢN
 									button: "OK!",
 								}).then(function() {
 									location.reload();
-								});
-							}else if(data == 2){
-								swal({
-									title: "Thất Bại!",
-									text: "Kiểm Tra Các Tài Sản Có Loại Này!",
-									icon: "error",
-									button: "OK!",
 								});
 							}
 						},

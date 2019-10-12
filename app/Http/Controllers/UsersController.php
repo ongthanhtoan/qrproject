@@ -37,7 +37,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        if(DB::table('users')->where('HoTen',$request->HoTen)->first()){
+        if(DB::table('users')->where('username',$request->username)->first()){
             return response()->json([
                 $data = 0
             ],200);

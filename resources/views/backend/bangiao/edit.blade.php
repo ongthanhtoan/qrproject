@@ -3,7 +3,7 @@
 Bàn Giao - Tài Sản
 @endsection
 @section('title-header')
-CẬP NHẬT BÀN GIAO TÀI SẢN
+BÀN GIAO TÀI SẢN
 @endsection
 @section('main-content')
 @section('custom-css')
@@ -15,8 +15,8 @@ CẬP NHẬT BÀN GIAO TÀI SẢN
 		visibility: visible;
 	}
 </style>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
+<link rel="stylesheet" href="{{asset('vendor/jquery-ui.css')}}">
+<link rel="stylesheet" href="{{asset('vendor/chosen.min.css')}}">
 @endsection  
 <form class="validate" autocomplete="off">
 	<div class="row">
@@ -73,7 +73,7 @@ CẬP NHẬT BÀN GIAO TÀI SẢN
 
 		<div class="col-md-6">
 			<div class="form-group">
-				<label class="control-label">Ngày Giao</label>
+				<label class="control-label">Ngày Nhận</label>
 
 				<div>
 					<input id="bg_NgayNhan" type="text" class="form-control datepicker" data-start-view="2" placeholder="Chọn Ngày Nhận" value="{{$BanGiao->bg_NgayNhan}}">
@@ -107,8 +107,8 @@ CẬP NHẬT BÀN GIAO TÀI SẢN
 			</div>
 		</div>
 		<div class="text-center">
-			<a href="{{route('ban-giao.index')}}" type="button" class="btn btn-danger">Đóng</a>
 			<button type="button" class="btn btn-info" id="btnSua">Cập Nhật</button>
+			<a href="{{route('ban-giao.index')}}" type="button" class="btn btn-danger">Trở lại</a>
 		</div>
 	</div>
 </form>
@@ -136,15 +136,15 @@ CẬP NHẬT BÀN GIAO TÀI SẢN
 						if(data == 1){
 							swal({
 								title: "Thành Công",
-								text: "Đã Được Thêm Mới!",
+								text: "Cập nhật thành công!",
 								icon: "success",
 							}).then(function(){
 								location.href = '{{route('ban-giao.index')}}';
 							});
 						}else if(data == 2){
 							swal({
-								title: "Thất Bại",
-								text: "Lỗi Thử Lại Sau, Hoặc Liên Hệ Với Quản Trị Web!",
+								title: "Thất bại",
+								text: "Lỗi vui lòng thử lại sau!",
 								icon: "error",
 							});
 						}
@@ -152,16 +152,16 @@ CẬP NHẬT BÀN GIAO TÀI SẢN
 				});
 			}else{
 				swal({
-					title: "Thất Bại",
-					text: "Kiểm Tra Lại Các Trường Cần Nhập!",
+					title: "Thất bại",
+					text: "Kiểm tra lại các thông tin cần nhập!",
 					icon: "error",
 				});
 			}
 		});
 	});
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<script src="{{asset('vendor/jquery-ui.min.js')}}"></script>
+<script src="{{asset('vendor/chosen.jquery.min.js')}}"></script>
 <script type="text/javascript">
 	$(".chosen").chosen();
 </script>

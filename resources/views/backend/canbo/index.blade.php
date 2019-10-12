@@ -7,15 +7,15 @@ DANH SÁCH CÁN BỘ
 @endsection
 @section('main-content')
 <p class="action" align="right">
-	<a id="modal" class="btn btn-blue">Thêm</a>
+	<a id="modal" class="btn btn-blue">Thêm từ tài khoản quản trị</a>
 </p>
 <table class="table table-bordered responsive"> 
 	<thead>
 		<tr>
 			<th class="text-center" width="10%">STT</th>
 			<th class="text-center" width="20%">Tên đăng nhập</th>
-			<th class="text-center" width="20%">Họ Tên</th>
-			<th class="text-center" width="20%">Kiểm Kê</th>
+			<th class="text-center" width="20%">Họ tên</th>
+			<th class="text-center" width="20%">Quyền kiểm kê</th>
 			<th class="text-center" width="20%">Action</th>
 		</tr>
 	</thead>
@@ -25,7 +25,7 @@ DANH SÁCH CÁN BỘ
 			<td class="text-center">{{$stt+1}}</td>
 			<td class="text-center">{{$CanBo->cb_TenDangNhap}}</td>
 			<td class="text-center">{{$CanBo->cb_HoTen}}</td>
-			<td class="text-center">{{$CanBo->cb_KiemKe}}</td>
+			<td class="text-center">{{$CanBo->cb_KiemKe==1?"X":""}}</td>
 			@if($CanBo->cb_KiemKe == 0)
 			<td class="text-center">
 				<button data-id="{{$CanBo->cb_TenDangNhap}}" class="btn btn-success btnCapQuyen">Cấp Quyền</button>
@@ -49,7 +49,7 @@ DANH SÁCH CÁN BỘ
 
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Thêm Cán Bộ</h4>
+				<h4 class="modal-title">Thêm Mới Cán Bộ</h4>
 			</div>
 
 			<div class="modal-body">

@@ -8,6 +8,14 @@ DANH SÁCH TÀI SẢN
 @section('main-content')
 @section('custom-css')
 <style>
+    table{
+        margin: 0 auto;
+        width: 100%;
+        clear: both;
+        border-collapse: collapse;
+        table-layout: fixed; // ***********add this
+        word-wrap:break-word; // ***********and this
+    }
 	/*#myTable_filterWrapper{
 		width: 200px;
 	}*/
@@ -36,7 +44,7 @@ DANH SÁCH TÀI SẢN
 			<th class="text-center font-size-10">Loại Tài Sản</th>
 			<th class="text-center font-size-10">Hiện Trạng</th>
 			<th class="text-center font-size-10">Số Lượng</th>
-			<th class="text-center font-size-10" width="40px;">Năm</th>
+			<th class="text-center font-size-10">Năm</th>
 			<th class="text-center font-size-10">Ngày Kiểm Kê</th>
 			<th class="text-center font-size-10">Người Kiểm Kê</th>
 			<th class="text-center font-size-10">Kiểm Kê</th>
@@ -59,12 +67,16 @@ DANH SÁCH TÀI SẢN
 			<td class="text-center font-size-10 anchu">{{$taisan->cb_HoTen}}</td>
 			<td class="text-center font-size-10">
 				@if($taisan->ts_KiemKe==1)
-				X
+				Đã kiểm kê
+                                @else
+                                Chưa kiểm kê
 				@endif
 			</td>
 			<td class="text-center font-size-10">
 				@if($taisan->ts_HieuLuc==1)
-				X
+				Đã bàn giao
+                                @else
+                                Chưa kiểm kê
 				@endif
 			</td>
 			<td class="text-center">
@@ -125,25 +137,16 @@ DANH SÁCH TÀI SẢN
 <script>
 	$(document).ready(function(){
 		$('#myTable').DataTable({
-			// initComplete: function () {
-	  //           this.api().columns([3,4,8]).every( function () {
-	  //               var column = this;
-	  //               var select = $('<select style = "font-size: 13px;"><option value="">Tất cả</option></select>')
-	  //                   .appendTo( $(column.header()) )
-	  //                   .on( 'change', function () {
-	  //                       var val = $.fn.dataTable.util.escapeRegex(
-	  //                           $(this).val()
-	  //                       );
-	  //                       column
-	  //                           .search( val ? '^'+val+'$' : '', true, false )
-	  //                           .draw();
-	  //                   } );
-	 
-	  //               column.data().unique().sort().each( function ( d, j ) {
-	  //                   select.append( '<option value="'+d+'">'+d+'</option>' )
-	  //               } );
-	  //           } );
-	  //       },
+                        columnDefs: [
+                            { width: 10, targets: 0 },
+                            { width: 20, targets: 1 },
+                            { width: 50, targets: 4 },
+                            { width: 10, targets: 5 },
+                            { width: 30, targets: 6 },
+                            { width: 30, targets: 7 },
+                            { width: 10, targets: 11 },
+                            { width: 40, targets: 12 },
+                        ],
 			pageLength: 25,
 			responsive: true,
 			language: {
