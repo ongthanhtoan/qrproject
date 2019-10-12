@@ -23,11 +23,10 @@ class TaiSanController extends Controller
     public function index(Request $request)
     {
         $Year = date('Y');
-        $TaiSan = DB::table('taisan_'.$Year)->select(DB::raw("taisan_$Year.*,loai.*,hientrang.*,canbo.*,bangiao.*"))
+        $TaiSan = DB::table('taisan_'.$Year)
         ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
         ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
         ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
-        ->join('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
         ->get();
         return view('backend.taisan.index')->with('danhsachtaisan',$TaiSan);
     }
@@ -418,7 +417,7 @@ class TaiSanController extends Controller
         $success = implode(", ", $temp);
         $error = $checkTS->implode('ts_MaTS', ', ');
         if(DB::table('taisan_'.$Year)->whereIn('ts_MaTS',$temp)->delete()){
-            return response()->json(['status'=>true,'message'=>"Xóa thành công các tài sản $success, <br> Các tài sản đã bàn giao không thể xóa $error"]);
+            return response()->json(['status'=>true,'message'=>"Xóa thành công tài sản $success"]);
         }else{
             return response()->json(['status'=>true,'message'=>"Lỗi thử lại sau!"]);
         }
