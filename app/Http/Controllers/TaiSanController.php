@@ -23,11 +23,39 @@ class TaiSanController extends Controller
     public function index(Request $request)
     {
         $Year = date('Y');
-        $TaiSan = DB::table('taisan_'.$Year)
-        ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
-        ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
-        ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
-        ->get();
+//        $TaiSan = DB::table('taisan_'.$Year)->select('taisan_'.$Year.'.ts_MaTS,ts_TenTS,ts_SoLuong,ts_NguyenGia,ts_Nam,ts_NgayKiemKe,ts_NangCap,ts_KiemKe,loai.l_MaLoai,l_TenLoai,hientrang.ht_MaHT,ht_TenHT,canbo.cb_TenDangNhap,ts_HieuLuc,bg_MaBG,
+//')
+//        ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
+//        ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
+//        ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
+//        ->join('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
+//        ->get();
+        $TaiSan = DB::select("SELECT
+            a.ts_MaTS,
+            a.ts_TenTS,
+            a.ts_Nam,
+            a.ts_KiemKe,
+            a.ts_HieuLuc,
+            a.ts_NangCap,
+            a.ts_SoLuong,
+            a.ts_NguyenGia,
+            a.ts_NgayKiemKe,
+            b.l_TenLoai,
+            c.ht_TenHT,
+            d.cb_HoTen,
+            d.cb_TenDangNhap,
+            e.bg_MaBG,
+        CASE
+            WHEN e.bg_MaBG IS NULL THEN
+            1 ELSE 0 
+        END AS da_ban_giao 
+        FROM
+            taisan_$Year a
+            LEFT JOIN loai b ON a.l_MaLoai = b.l_MaLoai
+            LEFT JOIN hientrang c ON a.ht_MaHT = c.ht_MaHT
+            LEFT JOIN canbo d ON a.cb_TenDangNhap = d.cb_TenDangNhap
+            LEFT JOIN bangiao e ON a.ts_MaTS = e.ts_MaTS 
+        ORDER BY a.ts_MaTS");
         return view('backend.taisan.index')->with('danhsachtaisan',$TaiSan);
     }
 
@@ -399,5 +427,26 @@ class TaiSanController extends Controller
         $Year = date('Y');
         $TaiSan = DB::table('taisan_'.$Year)->count();
         return $TaiSan;
+    }
+    
+    public function deleteMultiple(Request $request){
+        
+        $Year = date('Y');
+        $ids = $request->ids;
+        $temp = explode(",",$ids);
+        $checkTS = DB::table('bangiao')->select('ts_MaTS')->whereIn('ts_MaTS',$temp)->get();
+        foreach ($checkTS as $key => $value) {
+            foreach ($temp as $k => $v) {
+                if($value->ts_MaTS == $v){
+                    unset($temp[$k]);
+                }
+            }
+        }
+        $success = implode(", ", $temp);
+        if(DB::table('taisan_'.$Year)->whereIn('ts_MaTS',$temp)->delete()){
+            return response()->json(['status'=>true,'message'=>"Xóa thành công tài sản $success"]);
+        }else{
+            return response()->json(['status'=>true,'message'=>"Lỗi thử lại sau!"]);
+        }
     }
 }

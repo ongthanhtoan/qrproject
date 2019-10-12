@@ -28,6 +28,9 @@ Route::group(['middleware' => ['CheckLogin']], function () {
 	/*Reset*/
 	Route::get('/admin/reset','TaiSanController@getReset')->name('reset.getReset');
 	Route::post('/admin/reset/xu-ly','TaiSanController@postReset')->name('reset.postReset');
+        
+        //Xóa nhiều
+        Route::delete('admin/tai-san-delete-multiple','TaiSanController@deleteMultiple')->name('tai-san.multiple-delete');
 
 	/*Nhập xuất excel*/
 	Route::get('admin/import','TaiSanController@getImport')->name('import.getImport');
