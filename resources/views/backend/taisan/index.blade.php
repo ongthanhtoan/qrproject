@@ -76,7 +76,7 @@ DANH SÁCH TÀI SẢN
 				@if($taisan->ts_HieuLuc==1)
 				Đã bàn giao
                                 @else
-                                Chưa kiểm kê
+                                Chưa bàn giao
 				@endif
 			</td>
 			<td class="text-center">
