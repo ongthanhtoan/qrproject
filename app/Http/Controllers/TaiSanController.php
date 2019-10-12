@@ -23,25 +23,25 @@ class TaiSanController extends Controller
     public function index(Request $request)
     {
         $Year = date('Y');
-        $TaiSan = DB::table('taisan_'.$Year)->select(DB::raw("taisan_2019.ts_MaTS,
-	taisan_2019.ts_TenTS,
-	taisan_2019.ts_Nam,
-	taisan_2019.ts_KiemKe,
-	taisan_2019.ts_HieuLuc,
-	taisan_2019.ts_NangCap,
-	taisan_2019.ts_SoLuong,
-	taisan_2019.ts_NguyenGia,
-	taisan_2019.ts_NgayKiemKe,
-	taisan_2019.l_MaLoai,
-	loai.l_TenLoai,
-	hientrang.ht_MaHT,
-	hientrang.ht_TenHT,
-	canbo.cb_HoTen,
-	canbo.cb_TenDangNhap,
-	bangiao.bg_MaBG,
+        $TaiSan = DB::table('taisan_'.$Year)->select(DB::raw("ts_MaTS,
+	ts_TenTS,
+	ts_Nam,
+	ts_KiemKe,
+	ts_HieuLuc,
+	ts_NangCap,
+	ts_SoLuong,
+	ts_NguyenGia,
+	ts_NgayKiemKe,
+	l_MaLoai,
+	l_TenLoai,
+	ht_MaHT,
+	ht_TenHT,
+	cb_HoTen,
+	cb_TenDangNhap,
+	bg_MaBG,
 CASE
 		
-		WHEN bangiao.bg_MaBG IS NULL THEN
+		WHEN bg_MaBG IS NULL THEN
 		1 ELSE 0 
 	END AS da_ban_giao "))
         ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
