@@ -27,7 +27,7 @@ class TaiSanController extends Controller
         ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
         ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
         ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
-        ->join('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
+        ->leftjoin('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
         ->get();
         return view('backend.taisan.index')->with('danhsachtaisan',$TaiSan);
     }
