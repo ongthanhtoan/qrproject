@@ -292,6 +292,31 @@ DANH SÁCH TÀI SẢN
 					</div>
 
 				</div>
+                                <div class="row">
+					<div class="col-md-4" style='text-align: right'>
+
+						<div class="form-group">
+                                                       <p><b>Tạo Mã QR:</b></p>
+						</div>	
+
+					</div>
+                                    <div class="col-md-8" style='text-align: left'>
+
+						<div class="form-group">
+                                                    <input type='checkbox' class='chk_TaoMa' onclick="taoMa();">
+						</div>	
+
+					</div>
+				</div>
+                                <div class="row">
+                                        <div class="col-md-2 text-left"></div>
+                                        <div class="col-md-10 text-left" style="padding: 0px;">
+
+						<div class="form-group">
+                                                    <b><p id="link"></p></b>
+						</div>	
+					</div>
+				</div>
 
 			</div>
 
@@ -306,7 +331,20 @@ DANH SÁCH TÀI SẢN
 @endsection
 @section('custom-script')
 <script>
+            function taoMa(){
+                var chk = document.getElementsByClassName('chk_TaoMa');
+                if(chk[0].checked){
+                    var URL = "{{ route('kiem-ke-tai-san.show',":id") }}";
+                    var ID = $("#Ma_TS").text();
+                    URL = URL.replace(':id', ID);
+                    $("#link").html(URL);
+                    $("#link").show();
+                }else{
+                    $("#link").hide();
+                }
+            }
 	$(document).ready(function(){
+            $("#link").hide();
             $(".get_info").click(function(){
                 var ID = $(this).data('id');
                 var URL = "{{ route('tai-san.show',":id") }}";
