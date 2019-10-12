@@ -23,41 +23,32 @@ class TaiSanController extends Controller
     public function index(Request $request)
     {
         $Year = date('Y');
-//        $TaiSan = DB::table('taisan_'.$Year)->select('taisan_'.$Year.'.ts_MaTS,ts_TenTS,ts_SoLuong,ts_NguyenGia,ts_Nam,ts_NgayKiemKe,ts_NangCap,ts_KiemKe,loai.l_MaLoai,l_TenLoai,hientrang.ht_MaHT,ht_TenHT,canbo.cb_TenDangNhap,ts_HieuLuc,bg_MaBG,
-//')
-//        ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
-//        ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
-//        ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
-//        ->join('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
-//        ->get();
-        $TaiSan = DB::select("SELECT
-            taisan_$Year.ts_MaTS,
-            taisan_$Year.ts_TenTS,
-            taisan_$Year.ts_Nam,
-            taisan_$Year.ts_KiemKe,
-            taisan_$Year.ts_HieuLuc,
-            taisan_$Year.ts_NangCap,
-            taisan_$Year.ts_SoLuong,
-            taisan_$Year.ts_NguyenGia,
-            taisan_$Year.ts_NgayKiemKe,
-            taisan_$Year.l_MaLoai,
-            loai.l_TenLoai,
-            hientrang.ht_MaHT,
-            hientrang.ht_TenHT,
-            canbo.cb_HoTen,
-            canbo.cb_TenDangNhap,
-            bangiao.bg_MaBG,
-        CASE
-            WHEN bangiao.bg_MaBG IS NULL THEN
-            1 ELSE 0 
-        END AS da_ban_giao 
-        FROM
-            taisan_$Year
-            LEFT JOIN loai ON taisan_$Year.l_MaLoai = loai.l_MaLoai
-            LEFT JOIN hientrang ON taisan_$Year.ht_MaHT = hientrang.ht_MaHT
-            LEFT JOIN canbo ON taisan_$Year.cb_TenDangNhap = canbo.cb_TenDangNhap
-            LEFT JOIN bangiao ON taisan_$Year.ts_MaTS = bangiao.ts_MaTS 
-        ORDER BY taisan_$Year.ts_MaTS");
+        $TaiSan = DB::table('taisan_'.$Year)->select(DB::raw("taisan_2019.ts_MaTS,
+	taisan_2019.ts_TenTS,
+	taisan_2019.ts_Nam,
+	taisan_2019.ts_KiemKe,
+	taisan_2019.ts_HieuLuc,
+	taisan_2019.ts_NangCap,
+	taisan_2019.ts_SoLuong,
+	taisan_2019.ts_NguyenGia,
+	taisan_2019.ts_NgayKiemKe,
+	taisan_2019.l_MaLoai,
+	loai.l_TenLoai,
+	hientrang.ht_MaHT,
+	hientrang.ht_TenHT,
+	canbo.cb_HoTen,
+	canbo.cb_TenDangNhap,
+	bangiao.bg_MaBG,
+CASE
+		
+		WHEN bangiao.bg_MaBG IS NULL THEN
+		1 ELSE 0 
+	END AS da_ban_giao "))
+        ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
+        ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
+        ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
+        ->join('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
+        ->get();
         return view('backend.taisan.index')->with('danhsachtaisan',$TaiSan);
     }
 
@@ -445,8 +436,9 @@ class TaiSanController extends Controller
             }
         }
         $success = implode(", ", $temp);
+        $error = $checkTS->implode('ts_MaTS', ', ');
         if(DB::table('taisan_'.$Year)->whereIn('ts_MaTS',$temp)->delete()){
-            return response()->json(['status'=>true,'message'=>"Xóa thành công tài sản $success"]);
+            return response()->json(['status'=>true,'message'=>"Xóa thành công các tài sản $success, <br> Các tài sản đã bàn giao không thể xóa $error"]);
         }else{
             return response()->json(['status'=>true,'message'=>"Lỗi thử lại sau!"]);
         }
