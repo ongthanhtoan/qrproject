@@ -80,11 +80,6 @@
 						<td class="text-center">{{$bg->dv_TenDV}}</td>
 					</tr>
 					@endforeach
-                                        @if(count($dsBanGiao)==0)
-                                        <tr>
-                                            <td colspan="8" class="text-center">Không có tài sản nào được bàn giao!</td>
-                                        </tr>
-                                        @endif
 				</tbody>
 			</table>
 			@show
