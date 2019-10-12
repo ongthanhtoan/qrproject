@@ -23,13 +23,12 @@ class TaiSanController extends Controller
     public function index(Request $request)
     {
         $Year = date('Y');
-        $TaiSan = DB::table('taisan_'.$Year)
+        $TaiSan = DB::table('bangiao')
+        ->join('taisan_'.$Year,'taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
         ->join('loai','taisan_'.$Year.'.l_MaLoai','=','loai.l_MaLoai')
         ->join('hientrang','taisan_'.$Year.'.ht_MaHT','=','hientrang.ht_MaHT')
         ->join('canbo','taisan_'.$Year.'.cb_TenDangNhap','=', 'canbo.cb_TenDangNhap')
-        ->leftjoin('bangiao','taisan_'.$Year.'.ts_MaTS','=', 'bangiao.ts_MaTS')
         ->get();
-        dd($TaiSan);
         return view('backend.taisan.index')->with('danhsachtaisan',$TaiSan);
     }
 
