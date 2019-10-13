@@ -128,7 +128,7 @@ CẬP NHẬT TÀI SẢN
 	</div>
 	<div class="text-center">
 		<button type="button" class="btn btn-info" id="btnSua">Cập Nhật</button>
-		<a href="{{route('tai-san.index')}}" class="btn btn-danger">Đóng</a>
+		<a href="{{route('tai-san.index')}}" class="btn btn-danger">Trở lại</a>
 	</div>
 </form>
 @endsection
@@ -157,7 +157,7 @@ CẬP NHẬT TÀI SẢN
 					if(data == 1){
 						swal({
 							title: "Thành Công",
-							text: "Tài Sản Đã Được Cập Nhật!",
+							text: "Cập nhật thành công",
 							icon: "success",
 						}).then(function(){
 							location.href = '{{route('tai-san.index')}}';
