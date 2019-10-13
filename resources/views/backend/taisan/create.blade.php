@@ -138,7 +138,7 @@ THÊM MỚI TÀI SẢN
 	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-info" id="btnThem">Thêm</button>
-		<a href="{{route('tai-san.index')}}" class="btn btn-danger">Đóng</a>
+		<a href="{{route('tai-san.index')}}" class="btn btn-danger">Trở Lại</a>
 	</div>
 </form>
 @endsection
@@ -172,7 +172,7 @@ THÊM MỚI TÀI SẢN
 					if(data == 1){
 						swal({
 							title: "Thành Công",
-							text: "Tài Sản Đã Được Thêm Mới!",
+							text: "Thêm mới thành công",
 							icon: "success",
 						}).then(function(){
 							location.href = '{{route('tai-san.index')}}';
