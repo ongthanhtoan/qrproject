@@ -21,7 +21,9 @@ class NhatKyController extends Controller
     public function index_search(Request $request) {
         Session::forget('data');
         $tuNgay = $request->tuNgay;
+        $tuNgay = str_replace('/', '-', $tuNgay);
         $denNgay = $request->denNgay;
+        $denNgay = str_replace('/', '-', $denNgay);
         $tuNgay = strtotime($tuNgay);
         $denNgay = strtotime($denNgay);
         $data = DB::table('nhatky')->whereBetween('nk_ThoiGian', [$tuNgay, $denNgay])->get();

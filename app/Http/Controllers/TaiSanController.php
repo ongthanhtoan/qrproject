@@ -311,7 +311,7 @@ class TaiSanController extends Controller
                         $tenTS = $infoTS[0]->ts_TenTS;
                         $soLuong = $infoTS[0]->ts_SoLuong;
                         $canBo = $infoTS[0]->cb_TenDangNhap;
-                        $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                        $thoiGian = now()->timestamp;
                         $data = Array([
                             'nk_MaDanhMuc' => $maTS,
                             'nk_NoiDung' => "Kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người kiểm kê: $canBo",
@@ -346,7 +346,7 @@ class TaiSanController extends Controller
                 $tenTS = $infoTS[0]->ts_TenTS;
                 $soLuong = $infoTS[0]->ts_SoLuong;
                 $canBo = $infoTS[0]->cb_TenDangNhap;
-                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $thoiGian = now()->timestamp;
                 $data = Array([
                     'nk_MaDanhMuc' => $maTS,
                     'nk_NoiDung' => "Kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người kiểm kê: $canBo",
@@ -389,7 +389,7 @@ class TaiSanController extends Controller
                         $tenTS = $infoTS[0]->ts_TenTS;
                         $soLuong = $infoTS[0]->ts_SoLuong;
                         $canBo = $infoTS[0]->cb_TenDangNhap;
-                        $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                        $thoiGian = now()->timestamp;
                         $data = Array([
                             'nk_MaDanhMuc' => $maTS,
                             'nk_NoiDung' => "Bỏ kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người kiểm kê: $canBo",
@@ -424,7 +424,7 @@ class TaiSanController extends Controller
                 $tenTS = $infoTS[0]->ts_TenTS;
                 $soLuong = $infoTS[0]->ts_SoLuong;
                 $canBo = $infoTS[0]->cb_TenDangNhap;
-                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $thoiGian = now()->timestamp;
                 $data = Array([
                     'nk_MaDanhMuc' => $maTS,
                     'nk_NoiDung' => "Bỏ kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người bỏ kiểm kê: $canBo",

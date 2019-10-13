@@ -75,7 +75,7 @@ class BanGiaoController extends Controller
                 $tenDonVi = $DonVi[0]->dv_TenDV;
                 $Phong = $Phong->getTenById($request->slPhong);
                 $tenPhong = $Phong[0]->p_TenPhong;
-                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $thoiGian = now()->timestamp;
                 $noiDung = "";
                 if(count($infoCu) > 0){
                     $nguoiNhanCu = $infoCu[0]->bg_NguoiNhan;
@@ -146,7 +146,7 @@ class BanGiaoController extends Controller
             $tenDonVi = $DonVi[0]->dv_TenDV;
             $Phong = $Phong->getTenById($request->slPhong);
             $tenPhong = $Phong[0]->p_TenPhong;
-            $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+            $thoiGian = now()->timestamp;
             $noiDung = "";
             if(count($infoCu) > 0){
                 $nguoiNhanCu = $infoCu[0]->bg_NguoiNhan;
@@ -211,7 +211,7 @@ class BanGiaoController extends Controller
                 $TaiSan = DB::table('bangiao')->select('ts_MaTS')->where('bg_MaBG',$value)->get();
                 //Ghi log
                 $infoCu = DB::table('bangiao')->where('bg_MaBG',$value)->get();
-                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $thoiGian = now()->timestamp;
                 $noiDung = "";
                 if(count($infoCu) > 0){
                     $maTS = $infoCu[0]->ts_MaTS;
