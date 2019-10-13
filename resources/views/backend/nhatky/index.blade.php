@@ -3,7 +3,7 @@
 Nhật Ký Bàn Giao
 @endsection
 @section('title-header')
-NHẬT KÝ BÀN GIAO
+NHẬT KÝ
 @endsection
 @section('main-content')
 <!--<p id="date_filter">
