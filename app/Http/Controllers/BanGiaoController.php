@@ -54,7 +54,7 @@ class BanGiaoController extends Controller
     public function store(Request $request)
     {
     	$Y = date('Y');
-        DB::table('bangiao')->insertGetId(
+        DB::table('bangiao')->insert(
             [
                     'ts_MaTS' => $request->slTaiSan,
                     'bg_NgayGiao' => $request->bg_NgayGiao,
@@ -64,7 +64,7 @@ class BanGiaoController extends Controller
                     'dv_MaDV' => $request->slDonVi,
                     'p_MaPhong' => $request->slPhong,
             ]);
-        $id = DB::getPdo()->lastInsertId();;
+        $id = DB::getPdo()->lastInsertId();
     	if($id != ""){
     		DB::table('taisan_'.$Y)->where('ts_MaTS', $request->slTaiSan)->update(['ts_HieuLuc' => 1]);
                 //Ghi log
