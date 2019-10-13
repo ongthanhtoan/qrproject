@@ -8,6 +8,11 @@ DANH SÁCH TÀI SẢN
 @section('main-content')
 @section('custom-css')
 <style>
+    //fix hiển thị model khi cuộn chuột ở dưới
+    body.modal-open {
+        overflow: hidden;
+        position: fixed;
+    }
     table{
         margin: 0 auto;
         width: 100%;
@@ -129,7 +134,7 @@ DANH SÁCH TÀI SẢN
 	</div>
 </div>
     <!--model chi tiet tai san-->
-    <div class="modal fade" id="ChiTiet_TS">
+    <div class="modal fade" id="ChiTiet_TS" style="overflow: auto">
         <div class="modal-dialog">
             <div class="modal-content" style="font-size:15px;">
 
@@ -404,7 +409,7 @@ DANH SÁCH TÀI SẢN
                              }else{
                                  kiemKe = "Chưa kiểm kê";
                              }
-                             $("#KiemKe_TS").html(kiemKe);
+                            $("#KiemKe_TS").html(kiemKe);
                             $('#ChiTiet_TS').modal().show();
                         },
                         error: function(){
