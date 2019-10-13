@@ -155,7 +155,7 @@ class BanGiaoController extends Controller
             }
             $data = Array([
                 'nk_MaDanhMuc' => $request->slTaiSan,
-                'nk_NoiDung' => "Bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan Ngày nhận $request->bg_NgayNhan, Người giao $request->slNguoiGiao, Ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
+                'nk_NoiDung' => "Cập nhật bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan Ngày nhận $request->bg_NgayNhan, Người giao $request->slNguoiGiao, Ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
                 'nk_ChucNang' => "Sửa",
                 'nk_ThoiGian' => $thoiGian
             ]);

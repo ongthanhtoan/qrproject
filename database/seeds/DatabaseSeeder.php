@@ -11,12 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
-                [
-                    'HoTen' => 'Hỗ trợ',
-                    'username' => 'admin',
-					'password' => bcrypt(111111)
-                ]
-        );
+        DB::table('nhatky')->delete();
     }
 }

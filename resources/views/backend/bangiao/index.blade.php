@@ -23,7 +23,7 @@ DANH SÁCH TÀI SẢN ĐÃ BẢN GIAO
 			<th class="text-center">Đơn Vị</th>
 			<th class="text-center">Phòng</th>
 			<th class="text-center">Sửa</th>
-			<th class="text-center">Chọn</th>
+			<th class="text-center">Chọn<input type="checkbox" id="check_all"></th>
 		</tr>
 	</thead>
 	<tbody>
