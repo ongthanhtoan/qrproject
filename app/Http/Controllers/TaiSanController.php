@@ -183,27 +183,32 @@ class TaiSanController extends Controller
     public function getReset()
     {
         $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
+//        dd($tables);
         return view('backend.taisan.reset')->with('table',$tables);
     }
     public function postReset(Request $request){
-        $tablename = $request->txtNamTS;
+        $tablename = "taisan_".$request->txtNamTS;
         try{
             if (Schema::hasTable($tablename)){
                 Schema::dropIfExists($tablename);
                 Schema::connection('mysql')->create($tablename, function($table)
                 {
-                    $table->string('ts_MaTS')->unique();
-                    $table->unsignedTinyInteger('l_MaLoai');
+                    $table->string('ts_MaTS');
+                    $table->primary('ts_MaTS');
                     $table->text('ts_TenTS');
                     $table->integer('ts_SoLuong');
                     $table->integer('ts_NguyenGia');
                     $table->string('ts_Nam');
+                    $table->string('ts_NgayKiemKe');
                     $table->text('ts_NangCap')->nullable();
                     $table->unsignedTinyInteger('ts_KiemKe');
+                    $table->unsignedTinyInteger('l_MaLoai');
                     $table->unsignedTinyInteger('ht_MaHT');
-                    $table->primary('ts_MaTS');
+                    $table->string('cb_TenDangNhap');
+                    $table->integer('ts_HieuLuc')->nullable();;
                     $table -> foreign("l_MaLoai") -> references("l_MaLoai") -> on("loai")->onUpdate('CASCADE');
                     $table -> foreign("ht_MaHT") -> references("ht_MaHT") -> on("hientrang")->onUpdate('CASCADE');
+                    $table -> foreign("cb_TenDangNhap") -> references("cb_TenDangNhap") -> on("canbo")->onUpdate('CASCADE');
                 });
                 $NamCapNhat = $request->NamTS_CapNhat;
                 $temps = DB::table($NamCapNhat)->get();
@@ -211,14 +216,17 @@ class TaiSanController extends Controller
                     DB::table($tablename )->insert(
                         [
                             'ts_MaTS' => $temp->ts_MaTS,
-                            'l_MaLoai' => $temp->l_MaLoai,
                             'ts_TenTS' => $temp->ts_TenTS,
                             'ts_SoLuong' => $temp->ts_SoLuong,
                             'ts_NguyenGia' => $temp->ts_NguyenGia,
                             'ts_Nam' => $temp->ts_Nam,
+                            'cb_TenDangNhap' => $temp->cb_TenDangNhap,
+                            'ts_NgayKiemKe' => $temp->ts_NgayKiemKe,
                             'ts_NangCap' => $temp->ts_NangCap,
+                            'l_MaLoai' => $temp->l_MaLoai,
                             'ht_MaHT' => $temp->ht_MaHT,
                             'ts_KiemKe' => 0,
+                            'ts_HieuLuc' => 0
                         ]
                     );
                 }
@@ -228,18 +236,22 @@ class TaiSanController extends Controller
             }else{
                 Schema::connection('mysql')->create($tablename, function($table)
                 {
-                    $table->string('ts_MaTS')->unique();
-                    $table->unsignedTinyInteger('l_MaLoai');
+                    $table->string('ts_MaTS');
+                    $table->primary('ts_MaTS');
                     $table->text('ts_TenTS');
                     $table->integer('ts_SoLuong');
                     $table->integer('ts_NguyenGia');
                     $table->string('ts_Nam');
+                    $table->string('ts_NgayKiemKe');
                     $table->text('ts_NangCap')->nullable();
                     $table->unsignedTinyInteger('ts_KiemKe');
+                    $table->unsignedTinyInteger('l_MaLoai');
                     $table->unsignedTinyInteger('ht_MaHT');
-                    $table->primary('ts_MaTS');
+                    $table->string('cb_TenDangNhap');
+                    $table->integer('ts_HieuLuc')->nullable();;
                     $table -> foreign("l_MaLoai") -> references("l_MaLoai") -> on("loai")->onUpdate('CASCADE');
                     $table -> foreign("ht_MaHT") -> references("ht_MaHT") -> on("hientrang")->onUpdate('CASCADE');
+                    $table -> foreign("cb_TenDangNhap") -> references("cb_TenDangNhap") -> on("canbo")->onUpdate('CASCADE');
                 });
                 $NamCapNhat = $request->NamTS_CapNhat;
                 $temps = DB::table($NamCapNhat)->get();
@@ -247,14 +259,17 @@ class TaiSanController extends Controller
                     DB::table($tablename )->insert(
                         [
                             'ts_MaTS' => $temp->ts_MaTS,
-                            'l_MaLoai' => $temp->l_MaLoai,
                             'ts_TenTS' => $temp->ts_TenTS,
                             'ts_SoLuong' => $temp->ts_SoLuong,
                             'ts_NguyenGia' => $temp->ts_NguyenGia,
                             'ts_Nam' => $temp->ts_Nam,
+                            'cb_TenDangNhap' => $temp->cb_TenDangNhap,
+                            'ts_NgayKiemKe' => $temp->ts_NgayKiemKe,
                             'ts_NangCap' => $temp->ts_NangCap,
+                            'l_MaLoai' => $temp->l_MaLoai,
                             'ht_MaHT' => $temp->ht_MaHT,
                             'ts_KiemKe' => 0,
+                            'ts_HieuLuc' => $temp->ts_HieuLuc
                         ]
                     );
                 }
@@ -373,20 +388,21 @@ class TaiSanController extends Controller
     }
     public function postImport(Request $request){
         $loi = Array();
-        $file =$request->file->store('temp');
-		$path=storage_path('app').'/'.$file;
+        $file =$request->file;
         if(!empty($file)){
-            //$original_name = $path->getClientOriginalName();
-            //if($original_name == "themtaisantufile.xlsx")
-            //{
+            $file2 = $request->file->store('temp');
+            $path=storage_path('app').'/'.$file2;
+            $original_name = $file->getClientOriginalName();
+            if($original_name == "themtaisantufile.xlsx")
+            {
                 //$file_path = $file->getPathName();
                 Excel::import(new TaiSanImport, $path);
                 return back();
-            //}else{
-                //$loi[] = "File excel không đúng định dạng, vui lòng sử dụng file mẫu để thêm.";
-            //}
+            }else{
+                $loi[] = "File excel không đúng định dạng, vui lòng sử dụng file mẫu để thêm.";
+            }
         }else{
-            $loi[] = "Vui lòng chọn file.";
+            $loi[] = "Vui lòng chọn file excel cần thêm.";
         }
         Session::flash('message', $loi);
         return redirect()->route('tai-san.index');

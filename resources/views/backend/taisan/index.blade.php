@@ -23,7 +23,7 @@ DANH SÁCH TÀI SẢN
 </style>
 @endsection
 <p align="right">
-	<a href="{{route('tai-san.create')}}" class="btn btn-blue">Thêm</a>
+	<a href="{{route('tai-san.create')}}" class="btn btn-blue">Thêm Mới</a>
         <button class="btn btn-danger delete-all" data-url="">Xóa</button>
 	<button type="button" class="btn btn-blue" data-toggle="modal" data-target="#myModal">Thêm từ file</button>
 	<a href="{{route('export.getExport')}}" class="btn btn-blue">Xuất excel</a>
@@ -202,7 +202,7 @@ DANH SÁCH TÀI SẢN
                                     <div class="col-md-8">
 
 						<div class="form-group">
-                                                    <p id='NguyenGia_TS' style='word-wrap: break-word;'> </p>
+                                                    <p class="number" id='NguyenGia_TS' style='word-wrap: break-word;'> </p>
 						</div>	
 
 					</div>
@@ -410,7 +410,7 @@ DANH SÁCH TÀI SẢN
                         error: function(){
                             swal({
                                     title: "Thất Bại!",
-                                    text: "Không Thể Sửa Vào Lúc Này",
+                                    text: "Thử lại sau!",
                                     icon: "error",
                                     button: "OK!",
                             });

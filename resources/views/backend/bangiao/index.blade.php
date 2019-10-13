@@ -8,6 +8,7 @@ DANH SÁCH TÀI SẢN ĐÃ BẢN GIAO
 @section('main-content')
 <p align="right">
 	<a class="btn btn-blue" href="{{route('ban-giao.create')}}">Thêm Mới</a>
+        <button class="btn btn-danger delete-all" data-url="">Xóa</button>
 </p>
 <table id="myTable" class="table table-bordered datatable" style="font-size: 12px;"> 
 	<thead>
@@ -22,12 +23,12 @@ DANH SÁCH TÀI SẢN ĐÃ BẢN GIAO
 			<th class="text-center">Đơn Vị</th>
 			<th class="text-center">Phòng</th>
 			<th class="text-center">Sửa</th>
-			<th class="text-center">Xóa</th>
+			<th class="text-center">Chọn</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach($dsBanGiao as $stt => $bg)
-		<tr>
+		<tr id="tr_{{$bg->bg_MaBG}}">
 			<td class="text-center">{{$stt+1}}</td>
 			<td class="text-center">{{$bg->ts_MaTS}}</td>
 			<td class="text-center">{{$bg->ts_TenTS}}</td>
@@ -49,7 +50,7 @@ DANH SÁCH TÀI SẢN ĐÃ BẢN GIAO
 				<a href="{{route('ban-giao.edit',['id'=>$bg->bg_MaBG])}}"><i class="entypo-pencil"></i></a>
 			</td>
                         <td class="text-center">
-				<button data-id="{{$bg->bg_MaBG}}" class="btn btn-red btn-icon btnXoa">Xóa<i class="entypo-cancel"></i></button>
+                            <input type="checkbox" class="chon" data-id="{{$bg->bg_MaBG}}">
 			</td>
 		</tr>
 		@endforeach
@@ -150,6 +151,72 @@ DANH SÁCH TÀI SẢN ĐÃ BẢN GIAO
 				}
 			});
 		});
+                $('#check_all').on('click', function(e) {
+                if($(this).is(':checked',true)){
+                    $(".chon").prop('checked', true); 
+                } else {  
+                    $(".chon").prop('checked',false);  
+                }  
+            });
+
+            $('.chon').on('click',function(){
+                if($('.chon:checked').length == $('.chon').length){
+                    $('#check_all').prop('checked',true);
+                }else{
+                    $('#check_all').prop('checked',false);
+                }
+            });
+            $('.delete-all').on('click', function(e) {
+                var idsArr = [];  
+                $(".chon:checked").each(function() {  
+                    idsArr.push($(this).attr('data-id'));
+                });  
+                if(idsArr.length <=0){  
+                    swal({
+                        title: "Vui lòng chọn các dòng cần xử lý!",
+                        icon: "info",
+                        button: "OK!",
+                    });
+                }else{
+                    event.preventDefault();
+                    swal({
+                            title: "Xác nhận xóa các dòng đã chọn?",
+                            text: "Nhấn OK Để Xóa, Cancel Để Hủy!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            var strIds = idsArr.join(","); 
+                            $.ajax({
+                            type: "POST",
+                            url: "{{ route('ban-giao.multiple-delete') }}",
+                            data: {
+                                'ids': strIds,
+                                '_token': '{{ csrf_token() }}',
+                                '_method': "DELETE"
+                            },
+                            success: function (data) {
+                                if (data['status']==true) {
+                                    $(".chon:checked").each(function() {  
+                                        $(this).parents("tr").remove();
+                                    });
+                                    swal({
+                                        title: data['message'],
+                                        icon: "success",
+                                        button: "OK!",
+                                    });
+                                }
+                            }
+                        });
+                        } else {
+                            swal("Đã Hủy!", {
+                                    icon: "info",
+                            });
+                        }
+                    });
+                }
+            }); 
 	});
 </script>
 @endsection

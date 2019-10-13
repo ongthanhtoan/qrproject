@@ -154,4 +154,15 @@ class BanGiaoController extends Controller
     		],200);
     	}
     }
+    public function deleteMultiple(Request $request){
+        
+        $ids = $request->ids;
+        $temp = explode(",",$ids);
+        $success = implode(", ", $temp);
+        if(DB::table('bangiao')->whereIn('bg_MaBG',$temp)->delete()){
+            return response()->json(['status'=>true,'message'=>"Xóa thành công các dòng được chọn."]);
+        }else{
+            return response()->json(['status'=>true,'message'=>"Lỗi thử lại sau!"]);
+        }
+    }
 }

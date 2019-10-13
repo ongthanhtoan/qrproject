@@ -12,7 +12,7 @@ KHỞI TẠO DỮ LIỆU
 			<th>Nhập Năm: </th>
 			<td>
 			<div class="form-group">
-				<input name="txtNamTS" id="txtNamTS"  class="form-control" type="text" class="validate" value="taisan_">
+				<input name="txtNamTS" id="txtNamTS"  class="form-control" type="text" class="validate" value="">
 			</div>
 			</td>
 		</tr>
@@ -22,7 +22,7 @@ KHỞI TẠO DỮ LIỆU
 				<select name="NamTS_CapNhat" id="NamTS_CapNhat"  class="form-control">
 					@foreach($table as $item)
 					@if (strpos($item, 'taisan') === 0 )
-					<option value="{{$item}}">{{$item}}</option>
+					<option value="{{$item}}">{{substr($item,7,12)}}</option>
 					@endif
 					@endforeach
 				</select>
