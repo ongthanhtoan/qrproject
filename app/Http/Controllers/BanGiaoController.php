@@ -54,17 +54,17 @@ class BanGiaoController extends Controller
     public function store(Request $request)
     {
     	$Y = date('Y');
-        $id = '';
-        $id = DB::table('bangiao')->insertGetId(
-    		[
-    			'ts_MaTS' => $request->slTaiSan,
-    			'bg_NgayGiao' => $request->bg_NgayGiao,
-    			'bg_NguoiGiao' => $request->slNguoiGiao,
-    			'bg_NgayNhan' => $request->bg_NgayNhan,
-    			'bg_NguoiNhan' => $request->slNguoiNhan,
-    			'dv_MaDV' => $request->slDonVi,
-    			'p_MaPhong' => $request->slPhong,
-    		]);
+        DB::table('bangiao')->insertGetId(
+            [
+                    'ts_MaTS' => $request->slTaiSan,
+                    'bg_NgayGiao' => $request->bg_NgayGiao,
+                    'bg_NguoiGiao' => $request->slNguoiGiao,
+                    'bg_NgayNhan' => $request->bg_NgayNhan,
+                    'bg_NguoiNhan' => $request->slNguoiNhan,
+                    'dv_MaDV' => $request->slDonVi,
+                    'p_MaPhong' => $request->slPhong,
+            ]);
+        $id = DB::getPdo()->lastInsertId();;
     	if($id != ""){
     		DB::table('taisan_'.$Y)->where('ts_MaTS', $request->slTaiSan)->update(['ts_HieuLuc' => 1]);
                 //Ghi log
