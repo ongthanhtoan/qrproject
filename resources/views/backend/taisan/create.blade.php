@@ -145,6 +145,9 @@ THÊM MỚI TÀI SẢN
 @section('custom-script')
 <script>
 	$(document).ready(function(){
+            $("#ts_Nam").datepicker({
+                dateFormat: "dd/mm/yy",
+            });
 		$('#btnThem').click(function(){
                     var data =  $("#frmMain").serialize();
 			if($("#ts_MaTS").val() != "" && $("#ts_TenTS").val() != "" && $("#ts_SoLuong").val() != "" 

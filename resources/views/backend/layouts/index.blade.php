@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="{{asset('theme/backend/assets/js/icheck/skins/flat/_all.css')}}">
     <link rel="stylesheet" href="{{asset('theme/backend/assets/js/icheck/skins/futurico/futurico.css')}}">
     <link rel="stylesheet" href="{{asset('theme/backend/assets/js/icheck/skins/polaris/polaris.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/jquery-ui.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/chosen.min.css')}}">
     <link rel="stylesheet" href="{{asset('theme/backend/assets/css/custom.css')}}">
 
     <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -104,16 +106,13 @@
     <script src="{{asset('theme/backend/assets/js/daterangepicker/daterangepicker.js')}}"></script>
     <script src="{{asset('theme/backend/assets/js/jquery.multi-select.js')}}"></script>
     <script src="{{asset('theme/backend/assets/js/icheck/icheck.min.js')}}"></script>
+    <script src="{{asset('vendor/chosen.jquery.min.js')}}"></script>
 
 
     <!-- JavaScripts initializations and stuff -->
     <script src="{{asset('theme/backend/assets/js/neon-custom.js')}}"></script>
     <script src="{{asset('vendor/sweetalert.min.js')}}"></script>
     <script src="{{asset('vendor/filterDropDown.min.js')}}"></script>
-    {{-- <script src="{{asset('vendor/jquery.datetimepicker.full.js')}}"></script> --}}
-
-    <!-- Demo Settings -->
-    {{-- <script src="{{asset('theme/backend/assets/js/neon-demo.js')}}"></script> --}}
     @section('custom-script')
     @show
 </body>

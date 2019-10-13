@@ -70,8 +70,6 @@ BÀN GIAO TÀI SẢN
 	.show {display: block;}
 	/*------------------------------*/
 </style>
-<link rel="stylesheet" href="{{asset('vendor/jquery-ui.css')}}">
-<link rel="stylesheet" href="{{asset('vendor/chosen.min.css')}}">
 @endsection
 <form class="validate" autocomplete="off">
 	<div class="row">
@@ -169,6 +167,8 @@ BÀN GIAO TÀI SẢN
 </form>
 @endsection
 @section('custom-script')
+<script src="{{asset('vendor/jquery-ui.min.js')}}"></script>
+<script src="{{asset('vendor/jquery.ui.datepicker-vi-VN.js')}}"></script>
 <script>
 	$(document).ready(function(){
 		$('#btnThem').click(function(){
@@ -214,8 +214,6 @@ BÀN GIAO TÀI SẢN
 		});
 	});
 </script>
-<script src="{{asset('vendor/jquery-ui.min.js')}}"></script>
-<script src="{{asset('vendor/chosen.jquery.min.js')}}"></script>
 <script type="text/javascript">
 	$(".chosen").chosen();
 </script>

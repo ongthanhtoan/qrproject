@@ -13,6 +13,7 @@ use Schema;
 use Session;
 use App\Imports\TaiSanImport;
 use App\Exports\TaiSanExport;
+use Carbon\Carbon;
 class TaiSanController extends Controller
 {
     /**
@@ -304,6 +305,20 @@ class TaiSanController extends Controller
                             'ts_KiemKe'=> 1
                         ]
                     )){
+                        //Ghi log
+                        $infoTS = DB::table('taisan_'.$Year)->where('ts_MaTS',$id)->get();
+                        $maTS = $infoTS[0]->ts_MaTS;
+                        $tenTS = $infoTS[0]->ts_TenTS;
+                        $soLuong = $infoTS[0]->ts_SoLuong;
+                        $canBo = $infoTS[0]->cb_TenDangNhap;
+                        $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                        $data = Array([
+                            'nk_MaDanhMuc' => $maTS,
+                            'nk_NoiDung' => "Kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người kiểm kê: $canBo",
+                            'nk_ChucNang' => "Kiểm kê",
+                            'nk_ThoiGian' => $thoiGian
+                        ]);
+                        DB::table('nhatky')->insert($data);
                         Session::flash('alert-success', 'Đã Kiểm Kê');
                         return redirect()->route('kiem-ke-tai-san.show',['id'=>$id]);
                     }else{
@@ -325,6 +340,20 @@ class TaiSanController extends Controller
                     'ts_KiemKe'=> 1
                 ]
             )){
+                //Ghi log
+                $infoTS = DB::table('taisan_'.$Year)->where('ts_MaTS',$id)->get();
+                $maTS = $infoTS[0]->ts_MaTS;
+                $tenTS = $infoTS[0]->ts_TenTS;
+                $soLuong = $infoTS[0]->ts_SoLuong;
+                $canBo = $infoTS[0]->cb_TenDangNhap;
+                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $data = Array([
+                    'nk_MaDanhMuc' => $maTS,
+                    'nk_NoiDung' => "Kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người kiểm kê: $canBo",
+                    'nk_ChucNang' => "Kiểm kê",
+                    'nk_ThoiGian' => $thoiGian
+                ]);
+                DB::table('nhatky')->insert($data);
                 Session::flash('alert-success', 'Đã Kiểm Kê');
                 return redirect()->route('kiem-ke-tai-san.show',['id'=>$id]);
             }else{
@@ -354,6 +383,20 @@ class TaiSanController extends Controller
                             'ts_KiemKe'=> 0
                         ]
                     )){
+                        //Ghi log
+                        $infoTS = DB::table('taisan_'.$Year)->where('ts_MaTS',$id)->get();
+                        $maTS = $infoTS[0]->ts_MaTS;
+                        $tenTS = $infoTS[0]->ts_TenTS;
+                        $soLuong = $infoTS[0]->ts_SoLuong;
+                        $canBo = $infoTS[0]->cb_TenDangNhap;
+                        $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                        $data = Array([
+                            'nk_MaDanhMuc' => $maTS,
+                            'nk_NoiDung' => "Bỏ kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người kiểm kê: $canBo",
+                            'nk_ChucNang' => "Bỏ kiểm kê",
+                            'nk_ThoiGian' => $thoiGian
+                        ]);
+                        DB::table('nhatky')->insert($data);
                         Session::flash('alert-danger', 'Đã Huy Kiểm Kê');
                         return redirect()->route('kiem-ke-tai-san.show',['id'=>$id]);
                     }else{
@@ -375,6 +418,20 @@ class TaiSanController extends Controller
                     'ts_KiemKe'=> 0
                 ]
             )){
+                //Ghi log
+                $infoTS = DB::table('taisan_'.$Year)->where('ts_MaTS',$id)->get();
+                $maTS = $infoTS[0]->ts_MaTS;
+                $tenTS = $infoTS[0]->ts_TenTS;
+                $soLuong = $infoTS[0]->ts_SoLuong;
+                $canBo = $infoTS[0]->cb_TenDangNhap;
+                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $data = Array([
+                    'nk_MaDanhMuc' => $maTS,
+                    'nk_NoiDung' => "Bỏ kiểm kê tài sản $maTS - $tenTS, Số lượng: $soLuong, Người bỏ kiểm kê: $canBo",
+                    'nk_ChucNang' => "Bỏ kiểm kê",
+                    'nk_ThoiGian' => $thoiGian
+                ]);
+                DB::table('nhatky')->insert($data);
                 Session::flash('alert-danger', 'Đã Hủy Kiểm Kê');
                 return redirect()->route('kiem-ke-tai-san.show',['id'=>$id]);
             }else{

@@ -3,10 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Desktop/qrproject/routes/web.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/bangiao/index.blade.php</file>
             <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/layouts/index.blade.php</file>
-            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/taisan/index.blade.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/public/theme/backend/assets/js/jquery-ui/js/jquery-ui-1.10.3.custom.js</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/bangiao/edit.blade.php</file>
             <file>file:/C:/Users/Admin/Desktop/qrproject/app/Http/Controllers/TaiSanController.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/app/Phong.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/database/migrations/2019_10_13_055219_create_nhat_ky_table.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/public/theme/backend/assets/js/fullcalendar-2/lang/vi.js</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/app/DonVi.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/app/Http/Controllers/BanGiaoController.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/routes/web.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/public/theme/backend/assets/js/uikit/addons/js/datepicker.js</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/nhatky/index.blade.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/taisan/index.blade.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/app/Http/Controllers/NhatKyController.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/bangiao/create.blade.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/taisan/reset.blade.php</file>
+            <file>file:/C:/Users/Admin/Desktop/qrproject/resources/views/backend/taisan/create.blade.php</file>
         </group>
     </open-files>
 </project-private>

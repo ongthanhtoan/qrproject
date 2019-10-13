@@ -89,6 +89,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('nhat-ky.index')}}">
+                        <i class="entypo-users"></i>
+                        <span class="title">Nhật ký</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('reset.getReset')}}">
                         <i class="entypo-database"></i>
                         <span class="title">Khởi tạo dữ liệu</span>

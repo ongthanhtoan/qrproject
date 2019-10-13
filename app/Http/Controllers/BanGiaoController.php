@@ -8,6 +8,7 @@ use App\User;
 use App\HienTrang;
 use App\DonVi;
 use App\Phong;
+use Carbon\Carbon;
 class BanGiaoController extends Controller
 {
     /**
@@ -53,7 +54,7 @@ class BanGiaoController extends Controller
     public function store(Request $request)
     {
     	$Y = date('Y');
-    	if(DB::table('bangiao')->insert(
+        $id = DB::table('bangiao')->insertGetId(
     		[
     			'ts_MaTS' => $request->slTaiSan,
     			'bg_NgayGiao' => $request->bg_NgayGiao,
@@ -62,8 +63,31 @@ class BanGiaoController extends Controller
     			'bg_NguoiNhan' => $request->slNguoiNhan,
     			'dv_MaDV' => $request->slDonVi,
     			'p_MaPhong' => $request->slPhong,
-    		])){
+    		]);
+    	if($id != ""){
     		DB::table('taisan_'.$Y)->where('ts_MaTS', $request->slTaiSan)->update(['ts_HieuLuc' => 1]);
+                //Ghi log
+                $infoCu = DB::table('bangiao')->where('ts_MaTS',$request->slTaiSan)->where('bg_NguoiNhan','<>',$request->slNguoiNhan)->get();
+                $DonVi = new DonVi();
+                $Phong = new Phong();
+                $DonVi = $DonVi->getTenById($request->slDonVi);
+                $tenDonVi = $DonVi[0]->dv_TenDV;
+                $Phong = $Phong->getTenById($request->slPhong);
+                $tenPhong = $Phong[0]->p_TenPhong;
+                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $noiDung = "";
+                if(count($infoCu) > 0){
+                    $nguoiNhanCu = $infoCu[0]->bg_NguoiNhan;
+                    $ngayNhanCu = $infoCu[0]->bg_NgayNhan;
+                    $noiDung = " Tài sản $request->slTaiSan trước đó của $nguoiNhanCu nhận vào ngày $ngayNhanCu";
+                }
+                $data = Array([
+                    'nk_MaDanhMuc' => $request->slTaiSan,
+                    'nk_NoiDung' => "Bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan vào ngày $request->bg_NgayNhan, người giao $request->slNguoiGiao, ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
+                    'nk_ChucNang' => "Thêm",
+                    'nk_ThoiGian' => $thoiGian
+                ]);
+                DB::table('nhatky')->insert($data);
     		return response()->json([
     			$data = 1
     		],200);
@@ -113,19 +137,41 @@ class BanGiaoController extends Controller
     public function update(Request $request, $id)
     {
     	try{
-    		DB::table('bangiao')->where('bg_MaBG', $id)->update(
-    			[
-    				'ts_MaTS' => $request->slTaiSan,
-    				'bg_NgayGiao' => $request->bg_NgayGiao,
-    				'bg_NguoiGiao' => $request->slNguoiGiao,
-    				'bg_NgayNhan' => $request->bg_NgayNhan,
-    				'bg_NguoiNhan' => $request->slNguoiNhan,
-    				'dv_MaDV' => $request->slDonVi,
-    				'p_MaPhong' => $request->slPhong
-    			]);
-    		return response()->json([
-    			$data = 1
-    		],200);
+            //Ghi log
+            $infoCu = DB::table('bangiao')->where('bg_MaBG',$id)->get();
+            $DonVi = new DonVi();
+            $Phong = new Phong();
+            $DonVi = $DonVi->getTenById($request->slDonVi);
+            $tenDonVi = $DonVi[0]->dv_TenDV;
+            $Phong = $Phong->getTenById($request->slPhong);
+            $tenPhong = $Phong[0]->p_TenPhong;
+            $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+            $noiDung = "";
+            if(count($infoCu) > 0){
+                $nguoiNhanCu = $infoCu[0]->bg_NguoiNhan;
+                $ngayNhanCu = $infoCu[0]->bg_NgayNhan;
+                $noiDung = " Tài sản $request->slTaiSan trước đó của $nguoiNhanCu nhận vào ngày $ngayNhanCu";
+            }
+            $data = Array([
+                'nk_MaDanhMuc' => $request->slTaiSan,
+                'nk_NoiDung' => "Bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan vào ngày $request->bg_NgayNhan, người giao $request->slNguoiGiao, ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
+                'nk_ChucNang' => "Sửa",
+                'nk_ThoiGian' => $thoiGian
+            ]);
+            DB::table('nhatky')->insert($data);
+            DB::table('bangiao')->where('bg_MaBG', $id)->update(
+                    [
+                            'ts_MaTS' => $request->slTaiSan,
+                            'bg_NgayGiao' => $request->bg_NgayGiao,
+                            'bg_NguoiGiao' => $request->slNguoiGiao,
+                            'bg_NgayNhan' => $request->bg_NgayNhan,
+                            'bg_NguoiNhan' => $request->slNguoiNhan,
+                            'dv_MaDV' => $request->slDonVi,
+                            'p_MaPhong' => $request->slPhong
+                    ]);
+            return response()->json([
+                    $data = 1
+            ],200);
     	}catch(Exception $e){
     		return response()->json([
     			$data = 2
@@ -145,13 +191,13 @@ class BanGiaoController extends Controller
     	$TaiSan = DB::table('bangiao')->select('ts_MaTS')->where('bg_MaBG',$id)->get();
     	DB::table('taisan_'.$Y)->where('ts_MaTS', $TaiSan[0]->ts_MaTS)->update(['ts_HieuLuc' => 0]);
     	if(DB::table('bangiao')->where('bg_MaBG',$id)->delete()){
-    		return response()->json([
-    			$data = 1
-    		],200);
+            return response()->json([
+                    $data = 1
+            ],200);
     	}else{
-    		return response()->json([
-    			$data = 0
-    		],200);
+            return response()->json([
+                    $data = 0
+            ],200);
     	}
     }
     public function deleteMultiple(Request $request){
@@ -159,10 +205,31 @@ class BanGiaoController extends Controller
         $ids = $request->ids;
         $temp = explode(",",$ids);
         $success = implode(", ", $temp);
-        if(DB::table('bangiao')->whereIn('bg_MaBG',$temp)->delete()){
-            return response()->json(['status'=>true,'message'=>"Xóa thành công các dòng được chọn."]);
-        }else{
-            return response()->json(['status'=>true,'message'=>"Lỗi thử lại sau!"]);
+        foreach ($temp as $key => $value) {
+            if($value != ""){
+                //Ghi log
+                $infoCu = DB::table('bangiao')->where('bg_MaBG',$value)->get();
+                $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
+                $noiDung = "";
+                if(count($infoCu) > 0){
+                    $maTS = $infoCu[0]->ts_MaTS;
+                    $nguoiNhanCu = $infoCu[0]->bg_NguoiNhan;
+                    $ngayNhanCu = $infoCu[0]->bg_NgayNhan;
+                    $noiDung = " Tài sản $maTS trước đó của $nguoiNhanCu nhận vào ngày $ngayNhanCu";
+                }
+                $data = Array([
+                    'nk_MaDanhMuc' => $maTS,
+                    'nk_NoiDung' => "Xóa tài sản được bàn giao $maTS $noiDung",
+                    'nk_ChucNang' => "Xóa",
+                    'nk_ThoiGian' => $thoiGian
+                ]);
+                DB::table('nhatky')->insert($data);
+                if(DB::table('bangiao')->where('bg_MaBG',$value)->delete()){
+                }else{
+//                    return response()->json(['status'=>true,'message'=>"Lỗi thử lại sau!"]);
+                }
+            }
         }
+        return response()->json(['status'=>true,'message'=>"Xóa thành công các dòng được chọn."]);
     }
 }
