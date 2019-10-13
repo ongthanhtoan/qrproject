@@ -3,7 +3,8 @@
  * Apply Here your Custom CSS
  *
 */
-
-body {
-	
+/*fix hiển thị model khi cuộn chuột ở dưới*/
+body.modal-open {
+	overflow: hidden;
+	position: fixed;
 }

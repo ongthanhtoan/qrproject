@@ -8,11 +8,7 @@ DANH SÁCH TÀI SẢN
 @section('main-content')
 @section('custom-css')
 <style>
-    //fix hiển thị model khi cuộn chuột ở dưới
-    body.modal-open {
-        overflow: hidden;
-        position: fixed;
-    }
+    
     table{
         margin: 0 auto;
         width: 100%;
