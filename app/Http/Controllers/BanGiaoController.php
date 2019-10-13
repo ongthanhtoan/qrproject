@@ -54,6 +54,7 @@ class BanGiaoController extends Controller
     public function store(Request $request)
     {
     	$Y = date('Y');
+        $id = '';
         $id = DB::table('bangiao')->insertGetId(
     		[
     			'ts_MaTS' => $request->slTaiSan,
