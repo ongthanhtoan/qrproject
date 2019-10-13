@@ -84,7 +84,7 @@ class BanGiaoController extends Controller
                 }
                 $data = Array([
                     'nk_MaDanhMuc' => $request->slTaiSan,
-                    'nk_NoiDung' => "Bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan vào ngày $request->bg_NgayNhan, người giao $request->slNguoiGiao, ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
+                    'nk_NoiDung' => "Bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan Ngày nhận $request->bg_NgayNhan, Người giao $request->slNguoiGiao, Ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
                     'nk_ChucNang' => "Thêm",
                     'nk_ThoiGian' => $thoiGian
                 ]);
@@ -155,7 +155,7 @@ class BanGiaoController extends Controller
             }
             $data = Array([
                 'nk_MaDanhMuc' => $request->slTaiSan,
-                'nk_NoiDung' => "Bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan vào ngày $request->bg_NgayNhan, người giao $request->slNguoiGiao, ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
+                'nk_NoiDung' => "Bàn giao tài sản $request->slTaiSan cho cán bộ $request->slNguoiNhan Ngày nhận $request->bg_NgayNhan, Người giao $request->slNguoiGiao, Ngày giao $request->bg_NgayGiao Đơn vị: $tenDonVi, Phòng: $tenPhong $noiDung",
                 'nk_ChucNang' => "Sửa",
                 'nk_ThoiGian' => $thoiGian
             ]);
@@ -202,12 +202,13 @@ class BanGiaoController extends Controller
     	}
     }
     public function deleteMultiple(Request $request){
-        
+        $Y = date('Y');
         $ids = $request->ids;
         $temp = explode(",",$ids);
         $success = implode(", ", $temp);
         foreach ($temp as $key => $value) {
             if($value != ""){
+                $TaiSan = DB::table('bangiao')->select('ts_MaTS')->where('bg_MaBG',$value)->get();
                 //Ghi log
                 $infoCu = DB::table('bangiao')->where('bg_MaBG',$value)->get();
                 $thoiGian = Carbon::parse(date('d-m-Y'))->timestamp;
@@ -226,6 +227,7 @@ class BanGiaoController extends Controller
                 ]);
                 DB::table('nhatky')->insert($data);
                 if(DB::table('bangiao')->where('bg_MaBG',$value)->delete()){
+                    DB::table('taisan_'.$Y)->where('ts_MaTS', $TaiSan[0]->ts_MaTS)->update(['ts_HieuLuc' => 0]);
                 }else{
 //                    return response()->json(['status'=>true,'message'=>"Lỗi thử lại sau!"]);
                 }
