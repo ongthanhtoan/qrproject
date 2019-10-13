@@ -110,7 +110,6 @@
     <script src="{{asset('theme/backend/assets/js/neon-custom.js')}}"></script>
     <script src="{{asset('vendor/sweetalert.min.js')}}"></script>
     <script src="{{asset('vendor/filterDropDown.min.js')}}"></script>
-    <script src="{{asset('vendor/jquery.formatCurrency-1.4.0.min.js')}}"></script>
     {{-- <script src="{{asset('vendor/jquery.datetimepicker.full.js')}}"></script> --}}
 
     <!-- Demo Settings -->
