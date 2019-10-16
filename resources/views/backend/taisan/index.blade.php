@@ -425,9 +425,9 @@ DANH SÁCH TÀI SẢN
             $('#myTable').DataTable({
                     columnDefs: [
                         { width: 18, targets: 0 },
-                        { width: 20, targets: 1 },
+                        { width: 100, targets: 1 },
                         { width: 50, targets: 4 },
-                        { width: 33, targets: 5 },
+                        { width: 32, targets: 5 },
                         { width: 35, targets: 6 },
                         { width: 35, targets: 7 },
                         { width: 50, targets: 9 },
