@@ -57,7 +57,7 @@ DANH SÁCH TÀI SẢN
 		@foreach($danhsachtaisan as $stt => $taisan)
 		<tr id="tr_{{$taisan->ts_MaTS}}">
                     <td class="text-center font-size-10"><a href="" onclick="return false;" data-id="{{$taisan->ts_MaTS}}" class="get_info"><b>{{$stt+1}}</b></a></td>
-			<td class="text-center font-size-10 anchu2">{{$taisan->ts_MaTS}}</td>
+			<td class="font-size-10 anchu2">{{$taisan->ts_MaTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ts_TenTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->l_TenLoai}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ht_TenHT}}</td>
