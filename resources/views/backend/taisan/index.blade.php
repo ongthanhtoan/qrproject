@@ -21,6 +21,7 @@ DANH SÁCH TÀI SẢN
             display: none;
     }
     .anchu{ max-width: 100px; min-width: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .anchu2{ max-width: 170px; min-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 </style>
 @endsection
 <p align="right">
@@ -56,7 +57,7 @@ DANH SÁCH TÀI SẢN
 		@foreach($danhsachtaisan as $stt => $taisan)
 		<tr id="tr_{{$taisan->ts_MaTS}}">
                     <td class="text-center font-size-10"><a href="" onclick="return false;" data-id="{{$taisan->ts_MaTS}}" class="get_info"><b>{{$stt+1}}</b></a></td>
-			<td class="text-center font-size-10 anchu">{{$taisan->ts_MaTS}}</td>
+			<td class="text-center font-size-10 anchu2">{{$taisan->ts_MaTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ts_TenTS}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->l_TenLoai}}</td>
 			<td class="text-center font-size-10 anchu">{{$taisan->ht_TenHT}}</td>
@@ -380,8 +381,9 @@ DANH SÁCH TÀI SẢN
             }
         }
 	$(document).ready(function(){
-            $("#link").hide();
             $(".get_info").click(function(){
+                $(".chk_TaoMa").removeAttr('checked');
+                $("#link").hide();
                 var ID = $(this).data('id');
                 var URL = "{{ route('tai-san.show',":id") }}";
                 URL = URL.replace(':id', ID);
