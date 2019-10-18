@@ -36,8 +36,8 @@ class BanGiaoController extends Controller
     {
     	$Y = date('Y');
         // lấy những tài sản chưa bàn giao
-        //where('ts_HieuLuc',0)
-    	$TaiSan = DB::table('taisan_'.$Y)->get();
+        //
+    	$TaiSan = DB::table('taisan_'.$Y)->where('ts_HieuLuc',0)->get();
     	$HienTrang = HienTrang::all();
     	$DonVi = DonVi::all();
     	$Phong = Phong::all();

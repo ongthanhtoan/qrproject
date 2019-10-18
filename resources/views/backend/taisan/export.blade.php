@@ -15,6 +15,7 @@
 			<th rowspan="2" align="center">Người quản lý/Sử dụng</th>
 			<th rowspan="2" align="center">Năm</th>
 			<th rowspan="2" align="center">Thay đổi cấu hình, nâng cấp tài sản</th>
+			<th rowspan="2" align="center">Kiểm kê</th>
 		</tr>
 		<tr>
 			<th align="center">Số mã vạch</th>
@@ -49,6 +50,7 @@
 			<td>{{$value->cb_HoTen}}</td>
 			<td>{{$value->ts_Nam}}</td>
 			<td>{{$value->ts_NangCap}}</td>
+			<td>{{$value->ts_KiemKe == 1?"X":""}}</td>
 		</tr>
 		@endforeach
 	</tbody>

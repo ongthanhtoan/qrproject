@@ -47,7 +47,7 @@ class TaiSanExport implements FromView, WithEvents, ShouldAutoSize
     			->get();
     			$Count = count($data)+2;
     			$Count2 = count($data);
-    			$cellRange = 'A1:S'.$Count; 
+    			$cellRange = 'A1:T'.$Count; 
     			$event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12);
     			$styleArray = [
     				'borders' => [
@@ -63,13 +63,13 @@ class TaiSanExport implements FromView, WithEvents, ShouldAutoSize
     					'bold' => true,
     				]
     			];
-    			$event->sheet->getDelegate()->getStyle('A1:S'.$Count)->applyFromArray($styleArray);
-    			$event->sheet->getStyle('A1:S2')->applyFromArray($styleArray2);
+    			$event->sheet->getDelegate()->getStyle('A1:T'.$Count)->applyFromArray($styleArray);
+    			$event->sheet->getStyle('A1:T2')->applyFromArray($styleArray2);
 
     			$event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(20);
 
-    			$event->sheet->getStyle('C1:S'.$Count)->getAlignment()->setHorizontal('center');
-    			$event->sheet->getStyle('A1:S2')->getAlignment()->applyFromArray(['vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER] );
+    			$event->sheet->getStyle('C1:T'.$Count)->getAlignment()->setHorizontal('center');
+    			$event->sheet->getStyle('A1:T2')->getAlignment()->applyFromArray(['vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER] );
     		},
     	];
     }
